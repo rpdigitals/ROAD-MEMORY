@@ -2,17 +2,17 @@
   <div class="wrapper">
     <side-bar>
       <template slot="links">
-        <sidebar-link to="/dashboard" name="Dashboard" icon="ti-panel" />
-        <sidebar-link to="/stats" name="User Profile" icon="ti-user" />
-        <sidebar-link
-          to="/table-list"
-          name="Table List"
-          icon="ti-view-list-alt"
-        />
-        <sidebar-link to="/typography" name="Typography" icon="ti-text" />
+        <sidebar-link to="/dashboard" name="Tableau de bord" icon="ti-panel" />
+        <sidebar-link to="/services" name="Services" icon="ti-bar-chart" />
+
+        <sidebar-link to="/booking" name="Reservations" icon="ti-shopping-cart" />
+        <sidebar-link to="/payments" name="Payements" icon="ti-wallet" />
+        <sidebar-link to="/news" name="News" icon="ti-receipt" />
+        <sidebar-link to="/subscription" name="Abonnements" icon="ti-id-badge" />
+        <sidebar-link to="/profil" name="Profil" icon="ti-user" />
         <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2" />
-        <sidebar-link to="/maps" name="Map" icon="ti-map" />
         <sidebar-link to="/notifications" name="Notifications" icon="ti-bell" />
+        <sidebar-link to="/maps" name="News" icon="ti-map" />
       </template>
       <mobile-menu>
         <li class="nav-item">

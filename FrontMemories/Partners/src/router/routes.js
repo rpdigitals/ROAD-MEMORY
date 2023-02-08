@@ -5,11 +5,15 @@ import NotFound from "@/pages/NotFoundPage.vue";
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
+import News from "@/pages/News.vue";
+import Subscription from "@/pages/Subscription.vue";
+import Services from "@/pages/Services.vue";
 import Notifications from "@/pages/Notifications.vue";
 import Icons from "@/pages/Icons.vue";
 import Maps from "@/pages/Maps.vue";
+import Payements from "@/pages/Payements.vue";
 import Typography from "@/pages/Typography.vue";
-import TableList from "@/pages/TableList.vue";
+import Reservations from "@/pages/Reservations.vue";
 
 const routes = [
   {
@@ -19,17 +23,33 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        name: "dashboard",
+        name: "Tableau de bord",
         component: Dashboard,
       },
       {
-        path: "stats",
-        name: "stats",
+        path: "profil",
+        name: "Profil",
         component: UserProfile,
       },
       {
+        path: "news",
+        name: "news",
+        component: News,
+      },
+      {
+        path: "subscription",
+        name: "Abonnements",
+        component: Subscription,
+      },
+      {
+        path: "services",
+        name: "Services",
+        component: Services,
+      },
+
+      {
         path: "notifications",
-        name: "notifications",
+        name: "Notifications",
         component: Notifications,
       },
       {
@@ -43,14 +63,19 @@ const routes = [
         component: Maps,
       },
       {
+        path: "payments",
+        name: "Payements",
+        component: Payements,
+      },
+      {
         path: "typography",
         name: "typography",
         component: Typography,
       },
       {
-        path: "table-list",
-        name: "table-list",
-        component: TableList,
+        path: "booking",
+        name: "Reservations",
+        component: Reservations,
       },
     ],
   },

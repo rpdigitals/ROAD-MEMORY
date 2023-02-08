@@ -17,8 +17,8 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="ti-panel"></i>
-              <p>Stats</p>
+              <i class="ti-plus"></i>
+              <p>Nouveau site</p>
             </a>
           </li>
           <drop-down
