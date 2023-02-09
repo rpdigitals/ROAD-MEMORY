@@ -67,6 +67,8 @@ class Partner extends Model
         $tableData=[];
         $tableData=[];
         $tableData=[];
+        $tableData=[];
+        $tableData=[];
         $tours=Tour::where('partner_id', $this->id)->get();
         foreach($tours as $tour){
             array_push( $tableData, $tour->bookingWithPartner() );
