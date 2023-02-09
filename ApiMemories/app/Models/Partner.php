@@ -22,7 +22,7 @@ use App\Http\Resources\RestoBooking as RestoBookingResource;
 class Partner extends Model
 {
     use HasFactory;
-     protected $fillable = 
+     protected $fillable =
      ['society_name',
     'ceo_name',
     'assistant_name',
@@ -47,8 +47,8 @@ class Partner extends Model
     }public function hotel(){
         return HotelResource::collection($this->hasMany(Hotel::class,'partner_id')->get());
     }
-    public function car(){  
-       // return CarModel::where('status', '=', 1)->get();     
+    public function car(){
+       // return CarModel::where('status', '=', 1)->get();
        //return  $this->hasMany(Car::class,'partner_id')->get();
       return  CarResource::collection($this->hasMany(CarModel::class,'partner_id')->get());
     }
@@ -65,11 +65,13 @@ class Partner extends Model
     }
     public function tourBooking(){
         $tableData=[];
+        $tableData=[];
+        $tableData=[];
         $tours=Tour::where('partner_id', $this->id)->get();
         foreach($tours as $tour){
             array_push( $tableData, $tour->bookingWithPartner() );
         }
-      
+
         return $tableData;
     }
     public function hotelBooking(){
@@ -78,7 +80,7 @@ class Partner extends Model
         foreach($hotels as $hotel){
             array_push( $tableData, $hotel->bookingWithPartner() );
         }
-      
+
         return $tableData;
     }
     public function restoBooking(){
@@ -87,7 +89,7 @@ class Partner extends Model
         foreach($restos as $resto){
             array_push( $tableData, $resto->bookingWithPartner() );
         }
-      
+
         return $tableData;
     }
     public function allBooking() {
@@ -97,9 +99,9 @@ class Partner extends Model
          $tourBookings = $this->tourBooking();
 
         return $data = [
-             'hotel-bookings' => $hotelBookings,
-            'resto-bookings'=> $restoBookings,
-            'tour-bookings'=> $tourBookings,
+             'hotelBookings' => $hotelBookings,
+            'restoBookings'=> $restoBookings,
+            'tourBookings'=> $tourBookings,
 
         ];
     }
@@ -127,5 +129,5 @@ class Partner extends Model
      }
     return $hasActiveSubs;
     }
-    
+
 }

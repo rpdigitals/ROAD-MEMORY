@@ -164,5 +164,12 @@ class TourController extends Controller {
         ->get() );
 
     }
+
+    public function allTourOfPartner( $id ) {
+        return TourResource::collection( Tour::where( 'status', 1 )
+        ->where( 'partner_id', $id )
+        ->get() );
+
+    }
 }
 

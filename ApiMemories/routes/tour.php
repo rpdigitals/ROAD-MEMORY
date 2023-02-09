@@ -27,3 +27,5 @@ Route::get( '/tour-detail/{id}', [ TourController::class, 'tourDetail' ] );
 Route::get( '/search-tour', [ TourController::class, 'searchTour' ] );
 Route::get( '/sort-tour-by-price/{sortOrder}', [ TourController::class, 'sortTourbyPrice' ] );
 
+Route::get( '/all-tour-of-partner/{id}', [ TourController::class, 'allTourOfPartner' ] );
+

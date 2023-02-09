@@ -33,3 +33,4 @@ Route::get( '/hotel-detail/{id}', [ HotelController::class, 'hotelDetail' ] );
 Route::get( '/search-hotel', [ HotelController::class, 'searchHotel' ] );
 Route::get( '/sort-hotel-by-price/{sortOrder}', [ HotelController::class, 'sortHotelbyPrice' ] );
 
+Route::get( '/all-hotel-of-partner/{id}', [ HotelController::class, 'allHotelOfPartner' ] );

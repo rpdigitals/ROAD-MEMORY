@@ -45,6 +45,13 @@ Route::post('/update-subscription/{id}',[GeneralController::class,'updateSubscri
 Route::get('/delete-subscription/{id}',[GeneralController::class,'deleteSubscription']);
 Route::get('/all-subscription',[GeneralController::class,'allSubscription']);
 
+Route::get('/number-of-service-partner/{id}',[GeneralController::class,'numberOfService']);
+Route::get('/number-of-booking-partner/{id}',[GeneralController::class,'numberOfBooking']);
+
+
+
+
+
 
 
 

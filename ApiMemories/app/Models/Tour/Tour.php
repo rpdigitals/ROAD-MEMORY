@@ -44,7 +44,7 @@ class Tour extends Model {
 
     public function bookingWithPartner() {
 
-        return TourBookingResource::collection( $this->hasMany( TourBooking::class )->get() );
+          return TourBookingResource::collection( $this->booking() );
     }
 
     public function review() {

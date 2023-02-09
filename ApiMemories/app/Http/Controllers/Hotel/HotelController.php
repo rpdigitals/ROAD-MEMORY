@@ -187,5 +187,11 @@ class HotelController extends Controller {
         ->get() );
 
     }
+    public function allHotelOfPartner( $id ) {
+        return HotelResource::collection( Hotel::where( 'status', 1 )
+        ->where( 'partner_id', $id )
+        ->get() );
+
+    }
 
 }

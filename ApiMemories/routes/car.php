@@ -11,3 +11,5 @@ Route::get( '/car-details/{id}', [ CarController::class, 'carDetails' ] );
 
 Route::get( '/search-car/{keyword}', [ CarController::class, 'searchCar' ] );
 Route::get( '/sort-car-by-price/{order}', [ CarController::class, 'sortCarbyPrice' ] );
+
+Route::get( '/all-car-of-partner/{id}', [ CarController::class, 'allCarOfPartner' ] );

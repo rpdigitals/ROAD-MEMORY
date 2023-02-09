@@ -27,3 +27,4 @@ Route::get( '/resto-detail/{id}', [ RestoController::class, 'RestoDetail' ] );
 Route::get( '/search-resto', [ RestoController::class, 'searchResto' ] );
 Route::get( '/sort-resto-by-table-price/{order}', [ RestoController::class, 'sortRestobyTablePrice' ] );
 
+Route::get( '/all-resto-of-partner/{id}', [ RestoController::class, 'allRestoOfPartner' ] );

@@ -97,4 +97,10 @@ class CarController extends Controller {
         return CarResource::collection( Car::where( 'id', $id )
         ->get() );
     }
+    public function allCarOfPartner( $id ) {
+        return CarResource::collection( Car::where( 'status', 1 )
+        ->where( 'partner_id', $id )
+        ->get() );
+
+    }
 }

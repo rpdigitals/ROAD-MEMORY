@@ -146,4 +146,10 @@ class RestoController extends Controller {
         ->get() );
 
     }
+    public function allRestoOfPartner( $id ) {
+        return RestoResource::collection( Resto::where( 'status', 1 )
+        ->where( 'partner_id', $id )
+        ->get() );
+
+    }
 }
