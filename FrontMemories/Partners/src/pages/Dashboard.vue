@@ -25,47 +25,5 @@
     </div>
   </div>
 </template>
-<script>
-import { StatsCard, ChartCard } from "@/components/index";
-import Chartist from "chartist";
-export default {
-  components: {
-    StatsCard,
-    ChartCard,
-  },
-  /**
-   * Chart data used to render stats, charts. Should be replaced with server data
-   */
-  data() {
-    return {
-      statsCards: [
-        {
-          type: "info",
-          icon: "ti-bar-chart",
-          title: "Services",
-          value: "105GB",
-        },
-        {
-          type: "success",
-          icon: "ti-wallet",
-          title: "Revenues",
-          value: "$1,345",
-        },
-        {
-          type: "danger",
-          icon: "ti-shopping-cart",
-          title: "Reservations",
-          value: "23",
-        },
-        {
-          type: "warning",
-          icon: "ti-thumb-up",
-          title: "Avis Positifs",
-          value: "+45",
-        },
-      ],
-    };
-  },
-};
-</script>
+<script src="../script/dashboard-script.js"></script>
 <style></style>
