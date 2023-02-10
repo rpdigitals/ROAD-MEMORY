@@ -1,91 +1,58 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-      <card :title="table1.title" :subTitle="table1.subTitle">
-        <div slot="raw-content" class="table-responsive">
-          <paper-table :data="table1.data" :columns="table1.columns">
-          </paper-table>
+  <div>
+    <div class="end-float">
+      <h5>Sites touristiques</h5>
+      <div class="card" v-for="(tour, index) in tourBookings" :key="tour.id">
+        <img
+          class="card-img-top"
+          src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">{{ tourServices[index].name }}</p>
         </div>
-      </card>
+      </div>
     </div>
-
-    <div class="col-12">
-      <card class="card-plain">
-        <div class="table-full-width table-responsive">
-          <paper-table
-            type="hover"
-            :title="table2.title"
-            :sub-title="table2.subTitle"
-            :data="table2.data"
-            :columns="table2.columns"
-          >
-          </paper-table>
+    <div class="end-float">
+      <h5>Hotels</h5>
+      <div class="card" v-for="(hotel, index) in hotelBookings" :key="hotel.id">
+        <img
+          class="card-img-top"
+          src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            {{ hotelServices[index].name }}
+          </p>
         </div>
-      </card>
+      </div>
+    </div>
+    <div class="end-float">
+      <h5>Resto</h5>
+      <div class="card" v-for="(resto, index) in restoBookings" :key="resto.id">
+        <img
+          class="card-img-top"
+          src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            {{ restoServices[index].name }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
-<script>
-import { PaperTable } from "@/components";
-const tableColumns = ["Id", "Name", "Salary", "Country", "City"];
-const tableData = [
-  {
-    id: 1,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
-  },
-  {
-    id: 2,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas",
-  },
-  {
-    id: 3,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux",
-  },
-  {
-    id: 4,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park",
-  },
-  {
-    id: 5,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten",
-  },
-];
-
-export default {
-  components: {
-    PaperTable,
-  },
-  data() {
-    return {
-      table1: {
-        title: "Stripped Table",
-        subTitle: "Here is a subtitle for this table",
-        columns: [...tableColumns],
-        data: [...tableData],
-      },
-      table2: {
-        title: "Table on Plain Background",
-        subTitle: "Here is a subtitle for this table",
-        columns: [...tableColumns],
-        data: [...tableData],
-      },
-    };
-  },
-};
-</script>
-<style></style>
+<script src="../script/reservations-script.js"></script>
+<style>
+.card {
+  float: left;
+  width: 30%;
+  margin-right: 3%;
+}
+.end-float {
+  clear: both;
+}
+</style>

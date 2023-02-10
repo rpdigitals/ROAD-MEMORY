@@ -1,5 +1,6 @@
 import { PaperTable } from "@/components";
 import Service from "../services/services-request";
+//afficher les images d une api en vue js dans une balise imag
 const tableColumnsTour = [
   "Id",
   "Nom",
@@ -8,7 +9,6 @@ const tableColumnsTour = [
   "Adresse",
   "Descriptions",
   "Prix",
-  "image",
   "Note",
 ];
 const tableColumnsResto = [
@@ -23,13 +23,14 @@ const tableColumnsResto = [
 ];
 const tableColumnsHotel = [
   "Id",
-  "Nom",
-  "Categories",
+  "Chambres",
   "Adresse",
+  "Categories",
   "Descriptions",
-  "image",
+  "Image",
   "Note",
 ];
+const tableColumnsCar = ["Id", "Nom", "Prix", "Marque", "image"];
 export default {
   components: {
     PaperTable,
@@ -68,7 +69,7 @@ export default {
             counter++;
           }
           this.table1 = {
-            title: "Sites",
+            title: "Sites Touristiques",
             subTitle: "",
             columns: [...tableColumnsTour],
             data: this.tableDataTour,
@@ -79,11 +80,31 @@ export default {
         (response) => {
           var hotels = response.data["data"];
           var counter = 1;
+          var numberOfRooms = 0;
+          var numberOfRoomsCategories = 0;
+          //get the number of rooms
+          for (var index = 0; index < hotels.length; index++) {
+            for (
+              var indexa = 0;
+              indexa < hotels[index].room_categories.length;
+              indexa++
+            ) {
+              numberOfRooms +=
+                hotels[index].room_categories[indexa].rooms.length;
+            }
+          }
+          //get the number of categorires of rooms
+
+          for (var index = 0; index < hotels.length; index++) {
+            numberOfRoomsCategories += hotels[index].room_categories.length;
+          }
+
           for (var index in hotels) {
             this.tableDataHotel.push({
               id: counter,
               nom: hotels[index].name,
-              categories: hotels[index].room_categories.length,
+              chambres: numberOfRooms,
+              categories: numberOfRoomsCategories,
               adresse: hotels[index].address,
               descriptions: hotels[index].description,
               image: hotels[index].picture,
@@ -92,19 +113,19 @@ export default {
             });
             counter++;
           }
-          this.table2 = {
+          this.table3 = {
             title: "Hotels",
-            subTitle: "Hotels",
+            subTitle: "",
             columns: [...tableColumnsHotel],
             data: this.tableDataHotel,
           };
         }
       );
       Service.restoService(sessionStorage.getItem("partnerId")).then(
-        (response) =>   {
+        (response) => {
           var resto = response.data["data"];
           var counter = 1;
-          console.log(resto);
+
           for (var index in resto) {
             this.tableDataResto.push({
               id: counter,
@@ -119,25 +140,40 @@ export default {
             });
             counter++;
           }
-          //   this.table3 = {
-          //     title: "Hotels",
-          //     subTitle: "Hotels",
-          //     columns: [...tableColumnsHotel],
-          //     data: this.tableDataHotel,
-          //   };
-          this.table3 = {
+
+          this.table2 = {
             title: "Restaurants",
-            subTitle: "resto",
-            columns: [...tableColumnsHotel],
-            data: this.tableDataHotel,
+            subTitle: "",
+            columns: [...tableColumnsResto],
+            data: this.tableDataResto,
           };
         }
       );
-      //   Service.carService(sessionStorage.getItem("partnerId")).then(
-      //     (response) => {
-      //       console.log(response.data["data"]);
-      //     }
-      //   );
+      Service.carService(sessionStorage.getItem("partnerId")).then(
+        (response) => {
+          "Id", "Nom", "Prix", "Marque", "image";
+          console.log(response.data["data"]);
+          var car = response.data["data"];
+          var counter = 1;
+          for (var index in car) {
+            this.tableDataCar.push({
+              id: counter,
+              nom: car[index].name,
+              prix: car[index].price,
+              marque: car[index].brand,
+              image: car[index].picture1,
+              identifier: car[index].id,
+            });
+            counter++;
+          }
+          this.table4 = {
+            title: "Voitures",
+            subTitle: "",
+            columns: [...tableColumnsCar],
+            data: this.tableDataCar,
+          };
+        }
+      );
     },
   },
   mounted() {

@@ -6,6 +6,7 @@
         <thead>
           <slot name="columns">
             <th v-for="column in columns" :key="column">{{ column }}</th>
+            <th>Image</th>
             <th>Action</th>
           </slot>
         </thead>
@@ -16,28 +17,11 @@
                 {{ itemValue(item, column) }}
               </td>
               <td>
-                <i class="ti-eye btn btn-success"></i
-                ><i class="ti-trash btn btn-danger"></i>
-              </td>
-            </slot>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div v-if="title == 'Resto'">
-      <h2>{{ title }}</h2>
-      <table class="table" :class="tableClass">
-        <thead>
-          <slot name="columns">
-            <th v-for="column in columns" :key="column">{{ column }}</th>
-            <th>Action</th>
-          </slot>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in data" :key="index">
-            <slot :row="item">
-              <td v-for="(column, index) in columns" :key="index">
-                {{ itemValue(item, column) }}
+                <img
+                  src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+                  alt=""
+                  width="70px"
+                />
               </td>
               <td>
                 <i class="ti-eye btn btn-success"></i

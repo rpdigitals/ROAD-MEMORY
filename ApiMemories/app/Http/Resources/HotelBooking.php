@@ -26,6 +26,7 @@ class HotelBooking extends JsonResource {
             'hotel_id'=>$this->hotel_id,
             'customer_id'=>$this->customer_id,
             'hotel'=>$this->hotel(),
+            'room'=>$this->room(),
             'customer'=>$this->customer(),
         ];
     }

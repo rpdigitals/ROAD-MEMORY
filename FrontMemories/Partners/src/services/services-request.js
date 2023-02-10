@@ -1,6 +1,9 @@
 import http from "../http-common";
 
 class Service {
+  service(partnerId) {
+    return http.get(`/partner-all-service/${partnerId}`);
+  }
   tourService(partnerId) {
     return http.get(`/all-tour-of-partner/${partnerId}`);
   }
