@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('number_of_nigth');
             $table->boolean('is_accepted')->nullable();
             $table->foreignId('hotel_id')->constrained()->ondelete('cascade');
-            $table->foreignId('room_id')->constrained()->ondelete('cascade');
+          //  $table->foreignId('room_id')->constrained()->ondelete('cascade');
             $table->foreignId('customer_id')->constrained()->ondelete('cascade');
         });
     }

@@ -7,3 +7,4 @@ Route::post( '/create-tour-category', [ AdminController::class, 'createTourCateg
 Route::post( '/update-tour-category/{id}', [ AdminController::class, 'updateTourCategory' ] );
 Route::get( '/delete-tour-category/{id}', [ AdminController::class, 'deleteTourCategory' ] );
 Route::get( '/all-tour-category', [ AdminController::class, 'allTourCategory' ] );
+Route::get( '/deletetest', [ AdminController::class, 'deletetest' ] );
