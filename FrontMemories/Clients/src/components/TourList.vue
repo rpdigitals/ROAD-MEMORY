@@ -137,17 +137,35 @@
                       ></span>
                       <div class="tooltip-content">
                         <h4>Horaires</h4>
-                        <strong>Lundi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Lundi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Mardi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Mercredi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Jeudi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Vendredi </strong> 09.00 AM - 5.30 PM <br />
-                        <strong>Samedi </strong> 09.00 AM - 5.30 PM
-                        <br />
 
-                        <strong>Dimanche</strong>
-                        <span class="label label-danger">Fermé</span>
+                        <div class="">
+                          <div class="days">
+                            <span class="eachDay">Lundi </span>
+                            <span class="eachDay">Mardi </span>
+                            <span class="eachDay">Mercredi </span>
+                            <span class="eachDay">Jeudi </span>
+                            <span class="eachDay">Vendredi </span>
+                            <span class="eachDay">Samedi </span>
+                            <span class="eachDay">Dimanche </span>
+                          </div>
+
+                          <div class="hours">
+                            {{ JSON.parse(tour.open_days_hours).monSt }} -
+                            {{ JSON.parse(tour.open_days_hours).monEn }}<br />
+                            {{ JSON.parse(tour.open_days_hours).tueSt }} -
+                            {{ JSON.parse(tour.open_days_hours).tueEn }} <br />
+                            {{ JSON.parse(tour.open_days_hours).wedSt }} -
+                            {{ JSON.parse(tour.open_days_hours).wedEn }} <br />
+                            {{ JSON.parse(tour.open_days_hours).turSt }} -
+                            {{ JSON.parse(tour.open_days_hours).turEn }} <br />
+                            {{ JSON.parse(tour.open_days_hours).friSt }} -
+                            {{ JSON.parse(tour.open_days_hours).friEn }} <br />
+                            {{ JSON.parse(tour.open_days_hours).satSt }} -
+                            {{ JSON.parse(tour.open_days_hours).satEn }} <br />
+                            {{ JSON.parse(tour.open_days_hours).sunSt }} -
+                            {{ JSON.parse(tour.open_days_hours).sunEn }} <br />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -170,7 +188,7 @@
                       ></span>
                       <div class="tooltip-content">
                         <h4>Langues</h4>
-                        {{ tour.languages }}
+                        {{ tour.languages.replaceAll(",", "-") }}
                       </div>
                     </div>
                   </li>
@@ -338,3 +356,25 @@
   </div> -->
   <!--End strip -->
 </template>
+<style scoped>
+.days {
+  float: left;
+  margin-right: 2px;
+}
+@media (min-width: 480px) {
+  .days {
+    float: left;
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+.hours {
+  float: left;
+  font-size: 12px;
+}
+span.eachDay {
+  font-size: 12px;
+  font-weight: bold;
+  display: block;
+}
+</style>

@@ -24,7 +24,7 @@ export default {
     getDatas() {
       Tour.allTour()
         .then((response) => {
-          //console.log(response.data["data"]);
+          console.log(JSON.parse(response.data["data"][0].open_days_hours));
           this.tours = response.data["data"];
           this.responseLength = this.tours.length;
         })

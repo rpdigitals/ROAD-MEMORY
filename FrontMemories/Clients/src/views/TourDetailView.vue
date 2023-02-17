@@ -27,7 +27,7 @@
               <li>
                 <i class="icon_set_1_icon-83"></i>{{ tour.visit_hour }} Heures
               </li>
-             
+
               <li v-if="tour.animals">
                 <i class="icon_set_1_icon-22"></i>Autorisé
               </li>
@@ -331,16 +331,16 @@
                 <tr>
                   <td>Prix</td>
                   <td class="text-end">
-                    {{ tour.price }}
+                    {{ this.price }}
                   </td>
                 </tr>
                 <tr class="total">
                   <td>Prix Total</td>
                   <td class="text-end" v-if="caracteristic.children">
-                    {{ numberOfPerson * tour.price }}
+                    {{ numberOfPerson * price }}
                   </td>
                   <td class="text-end" v-else>
-                    {{ (numberOfPerson + numberOfChildren) * tour.price }}
+                    {{ (numberOfPerson + numberOfChildren) * price }}
                   </td>
                 </tr>
               </tbody>

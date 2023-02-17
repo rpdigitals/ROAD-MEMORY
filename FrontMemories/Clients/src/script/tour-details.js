@@ -17,7 +17,7 @@ export default {
       time: "",
       numberOfPerson: 1,
       numberOfChildren: 1,
-      price: "",
+      price: 10,
       hasWished: "",
       isLogged: sessionStorage.getItem("isLogged"),
     };
@@ -26,7 +26,7 @@ export default {
     tourDetails(id) {
       Tour.tourDetails(id)
         .then((response) => {
-          //console.log(response.data["data"][0].price);
+          console.log(response.data["data"][0]);
           this.tour = response.data["data"][0];
           console.log(this.tour);
           this.tourId = response.data["data"][0].id;
@@ -37,6 +37,7 @@ export default {
             this.tour.id,
             parseInt(sessionStorage.getItem("customerId"))
           );
+          console.log(this.price);
         })
         .catch((e) => {
           console.log(e);

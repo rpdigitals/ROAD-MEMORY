@@ -1,14 +1,14 @@
 import http from "../../http-common";
 
 class Tour {
-  allTour() {
-    return http.get("/all-tour");
+  async allTour() {
+    return await http.get("/all-tour");
   }
   sortTourByPrice(sortOrder) {
     return http.get(`/sort-tour-by-price/${sortOrder}`);
   }
-  tourDetails(id) {
-    return http.get(`/tour-detail/${id}`);
+  async tourDetails(id) {
+    return await http.get(`/tour-detail/${id}`);
   }
   searchByKeyword(keyword) {
     console.log(keyword);
