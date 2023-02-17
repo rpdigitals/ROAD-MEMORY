@@ -14,6 +14,7 @@ import Maps from "@/pages/Maps.vue";
 import Payements from "@/pages/Payements.vue";
 import Typography from "@/pages/Typography.vue";
 import Reservations from "@/pages/Reservations.vue";
+import AddService from "@/pages/AddService.vue";
 
 const routes = [
   {
@@ -76,6 +77,11 @@ const routes = [
         path: "booking",
         name: "Reservations",
         component: Reservations,
+      },
+      {
+        path: "/add-service/:service",
+        name: "Ajouter un service",
+        component: AddService,
       },
     ],
   },

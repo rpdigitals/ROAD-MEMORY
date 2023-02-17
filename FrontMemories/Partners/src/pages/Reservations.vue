@@ -46,7 +46,7 @@
   </div>
 </template>
 <script src="../script/reservations-script.js"></script>
-<style>
+<style scoped>
 .card {
   float: left;
   width: 30%;

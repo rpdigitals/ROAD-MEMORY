@@ -25,5 +25,7 @@
     </div>
   </div>
 </template>
-<script src="../script/dashboard-script.js"></script>
+<script src="../script/dashboard-script.js">
+
+</script>
 <style></style>

@@ -70,8 +70,16 @@ export default {
         }
       );
     },
+    // register(){
+    //   Dashboard.register({
+    //     name:"Second Partner",
+    //     email:"secondpartner@gmail.com",
+    //     password:"secondpartner"
+    //   }).then((response) => { console.log(response.data)})  
+    // }
   },
   mounted() {
+    // this.register();
     sessionStorage.setItem("partnerId", 1);
     this.reservationInfo();
     this.serviceInfo();

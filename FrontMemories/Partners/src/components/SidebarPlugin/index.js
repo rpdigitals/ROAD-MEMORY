@@ -8,6 +8,7 @@ const SidebarStore = {
     this.showSidebar = value;
   },
 };
+//fonction algoriyhme d euclide
 
 const SidebarPlugin = {
   install(Vue) {

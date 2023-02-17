@@ -1,8 +1,11 @@
 import http from "../http-common";
 
 class Dashboard {
+  register(datas) {
+    http.post("register", datas);
+  }
   login(datas) {
-    http.post("login", datas);
+    http.post("register", datas);
   }
   booking(partnerId) {
     return http.get(`/partner-all-booking/${partnerId}`);

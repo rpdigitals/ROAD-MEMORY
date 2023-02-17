@@ -15,12 +15,17 @@
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="ti-plus"></i>
-              <p>Nouveau site</p>
-            </a>
-          </li>
+          
+          <drop-down
+            class="nav-item"
+            title="Ajouter"
+            title-classes="nav-link"
+          >
+            <a class="dropdown-item" href="#" @click="addService('tour')"> <i class="ti-plus"></i> Site touristique</a>
+            <a class="dropdown-item" href="#" @click="addService('hotel')"><i class="ti-plus"></i>Hotel</a>
+            <a class="dropdown-item" href="#" @click="addService('resto')"><i class="ti-plus"></i>Restaurant</a>
+            <a class="dropdown-item" href="#" @click="addService('car')"><i class="ti-plus"></i>Voiture</a>
+          </drop-down>
           <drop-down
             class="nav-item"
             title="5 Notifications"
@@ -72,6 +77,9 @@ export default {
     },
     hideSidebar() {
       this.$sidebar.displaySidebar(false);
+    },
+    addService(service) {
+     this.$router.push(`/add-service/${service}`);
     },
   },
 };

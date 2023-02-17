@@ -131,5 +131,7 @@ export default {
     });
   },
 };
+//How sort a list in Javascript
 </script>
-<style></style>
+<style> 
+</style>
