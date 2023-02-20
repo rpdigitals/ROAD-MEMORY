@@ -11,8 +11,7 @@
         </ul>
       </div>
     </div>
-    <!-- End Position -->
-
+    
     <div class="margin_60 container">
       <div id="tabs" class="tabs">
         <nav>

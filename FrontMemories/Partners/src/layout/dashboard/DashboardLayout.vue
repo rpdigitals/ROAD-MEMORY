@@ -23,12 +23,17 @@
         <sidebar-link to="/maps" name="News" icon="ti-map" />
       </template>
       <mobile-menu>
-        <li class="nav-item">
-          <a class="nav-link">
-            <i class="ti-panel"></i>
-            <p>Stats</p>
-          </a>
-        </li>
+         <drop-down
+            class="nav-item"
+            title="Ajouter"
+            title-classes="nav-link"
+            icon="ti-plus"
+          >
+            <a class="dropdown-item" href="#" @click="addService('tour')"> <i class="ti-plus"></i> Site touristique</a>
+            <a class="dropdown-item" href="#" @click="addService('hotel')"><i class="ti-plus"></i>Hotel</a>
+            <a class="dropdown-item" href="#" @click="addService('resto')"><i class="ti-plus"></i>Restaurant</a>
+            <a class="dropdown-item" href="#" @click="addService('car')"><i class="ti-plus"></i>Voiture</a>
+          </drop-down>
         <drop-down
           class="nav-item"
           title="5 Notifications"
@@ -77,6 +82,9 @@ export default {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
       }
+      },
+    addService(service) {
+     this.$router.push(`/add-service/${service}`);
     },
   },
 };

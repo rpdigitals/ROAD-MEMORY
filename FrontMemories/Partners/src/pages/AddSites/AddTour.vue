@@ -12,7 +12,8 @@
               v-model="name"
             >
             </fg-input>
-          </div>
+          </div> 
+          <div>
           <div class="col-md-4">
             <fg-input
               type="number"
@@ -290,6 +291,7 @@
             </div>
           </div>
         </div>
+        
         <div class="text-center">
           <button type="submit" class="btn-info">AJOUTER</button>
         </div>

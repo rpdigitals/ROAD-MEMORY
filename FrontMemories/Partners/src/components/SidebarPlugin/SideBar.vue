@@ -55,7 +55,7 @@ export default {
     },
     activeColor: {
       type: String,
-      default: "success",
+      default: "info",
       validator: (value) => {
         let acceptedValues = [
           "primary",
