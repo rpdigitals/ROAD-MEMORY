@@ -15,16 +15,19 @@
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          
-          <drop-down
-            class="nav-item"
-            title="Ajouter"
-            title-classes="nav-link"
-          >
-            <a class="dropdown-item" href="#" @click="addService('tour')"> <i class="ti-plus"></i> Site touristique</a>
-            <a class="dropdown-item" href="#" @click="addService('hotel')"><i class="ti-plus"></i>Hotel</a>
-            <a class="dropdown-item" href="#" @click="addService('resto')"><i class="ti-plus"></i>Restaurant</a>
-            <a class="dropdown-item" href="#" @click="addService('car')"><i class="ti-plus"></i>Voiture</a>
+          <drop-down class="nav-item" title="Ajouter" title-classes="nav-link">
+            <a class="dropdown-item" href="#" @click="addService('tour')">
+              <i class="ti-plus"></i> Site touristique</a
+            >
+            <a class="dropdown-item" href="#" @click="addService('hotel')"
+              ><i class="ti-plus"></i>Hotel</a
+            >
+            <a class="dropdown-item" href="#" @click="addService('resto')"
+              ><i class="ti-plus"></i>Restaurant</a
+            >
+            <a class="dropdown-item" href="#" @click="addService('car')"
+              ><i class="ti-plus"></i>Voiture</a
+            >
           </drop-down>
           <drop-down
             class="nav-item"
@@ -79,7 +82,7 @@ export default {
       this.$sidebar.displaySidebar(false);
     },
     addService(service) {
-     this.$router.push(`/add-service/${service}`);
+      this.$router.push(`/add-service/${service}`);
     },
   },
 };

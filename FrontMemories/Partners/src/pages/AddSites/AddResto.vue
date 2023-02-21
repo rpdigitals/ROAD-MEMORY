@@ -1,15 +1,15 @@
 <style></style>
 
 <template>
-  <card class="card" title="Ajouter un site touristique">
+  <card class="card" title="Ajouter un restaurant">
     <div>
-      <form @submit.prevent="addTour">
+      <form @submit.prevent="addResto">
         <div class="row">
           <div class="col-md-4">
             <fg-input
               type="text"
-              label="Nom du site"
-              placeholder="ex : Faille Aledjo"
+              label="Nom du resto"
+              placeholder="ex : KofResto"
               required
               v-model="name"
             >
@@ -18,20 +18,9 @@
           <div class="col-md-4">
             <fg-input
               type="number"
-              label="Prix de visite ( xof )"
-              placeholder="10000"
+              label="Prix de reservation d'une table ( xof )"
               required
               v-model="price"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="number"
-              label="Durée de visite ( h )"
-              placeholder="3h"
-              required
-              v-model="visitHour"
               min="1"
             >
             </fg-input>
@@ -61,13 +50,13 @@
           </div>
           <div class="col-md-4">
             <label for="">Categorie</label>
-            <select class="form-control" required v-model="tourCategoryId">
+            <select class="form-control" required v-model="restoCategoryId">
               <option
-                :value="tourCategory.id"
-                v-for="tourCategory in tourCategoryFromBd"
-                :key="tourCategory.id"
+                :value="restoCategory.id"
+                v-for="restoCategory in restoCategoryFromBd"
+                :key="restoCategory.id"
               >
-                {{ tourCategory.type }}
+                {{ restoCategory.name }}
               </option>
             </select>
           </div>
@@ -94,26 +83,11 @@
             >
             </fg-input>
           </div>
-          <div class="col-md-4">
-            <label for="">Langues</label>
-            <select class="form-control" multiple required v-model="languages">
-              <option value="Français">Français</option>
-              <option value="English">English</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Spanish">Spanish</option>
-              <option value="Deutsh">Deutsh</option>
-              <option value="Haoussa">Haoussa</option>
-              <option value="Ewe">Ewe</option>
-              <option value="Kabye">Kabye</option>
-              <option value="Kotokoli">Kotokoli</option>
-              <option value="Autres">Autres</option>
-            </select>
-          </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Description de site</label>
+              <label>Description du restaurant</label>
               <textarea
                 rows="10"
                 class="form-control border-input"
@@ -295,9 +269,9 @@
         <div
           class="alert alert-success text-center"
           style="font-size: 20px"
-          v-if="tourCreatedSuccessfully == 1"
+          v-if="restoCreatedSuccessfully == 1"
         >
-          <strong> Site crée avec succès </strong>
+          <strong> Site crée avec succes </strong>
           <strong>
             <router-link to="/services" class="btn btn-success">OK</router-link>
           </strong>
@@ -305,25 +279,25 @@
         <div
           class="alert alert-danger text-center"
           style="font-size: 20px"
-          v-if="tourCreatedSuccessfully == 0"
+          v-if="restoCreatedSuccessfully == 0"
         >
           <strong>
             Une erreur s'est produite. Vérifiez votre connexion et réessayez
           </strong>
           <strong>
-            <button @click="initializeTourCreation" class="btn">OK</button>
+            <button @click="initializeRestoCreation" class="btn">OK</button>
           </strong>
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn-info">CONTINUER</button>
+          <button type="submit" class="btn-info">AJOUTER</button>
         </div>
         <div class="clearfix"></div>
       </form>
     </div>
   </card>
 </template>
-<script src="../../script/add-tour.js"></script>
+<script src="../../script/add-resto.js"></script>
 <style scoped>
 .day {
   display: block;

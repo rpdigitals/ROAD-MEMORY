@@ -1,20 +1,16 @@
-import Tour from "../services/tour-request.js";
+import Hotel from "../services/hotel-request.js";
 
 export default {
   data() {
     return {
       name: "",
-      price: 0,
-      visitHour: "",
       longitude: "",
       latitude: "",
       picture: "",
       description: "",
       address: "",
-      languages: [],
       openDaysHours: [],
       partnerId: 0,
-      tourCategoryId: 0,
       monSt: "",
       tueSt: "",
       wedSt: "",
@@ -29,12 +25,11 @@ export default {
       friEn: "",
       satEn: "",
       sunEn: "",
-      tourCategoryFromBd: "",
-      tourCreatedSuccessfully: 2,
+      hotelCreatedSuccessfully: 2,
     };
   },
   methods: {
-    addTour() {
+    addHotel() {
       var openDaysHours = {
         monSt: this.monSt,
         tueSt: this.tueSt,
@@ -51,38 +46,27 @@ export default {
         satEn: this.satEn,
         sunEn: this.sunEn,
       };
-      Tour.addTour({
+      Hotel.addHotel({
         name: this.name,
         price: this.price,
-        visit_hour: this.visitHour,
         longitude: this.longitude,
         latitude: this.latitude,
-        tour_category_id: this.tourCategoryId,
         picture: this.picture,
         description: this.description,
         address: this.address,
-        languages: this.languages.toString(),
         open_days_hours: JSON.stringify(openDaysHours),
         partner_id: sessionStorage.getItem("partnerId"),
       })
         .then(() => {
-          this.tourCreatedSuccessfully = 1;
+          this.hotelCreatedSuccessfully = 1;
         })
         .catch(() => {
-          this.tourCreatedSuccessfully = 0;
+          this.hotelCreatedSuccessfully = 0;
         });
     },
-    getTourCategoryFromBd() {
-      Tour.getTourCategories().then((response) => {
-        //console.log(response.data);
-        this.tourCategoryFromBd = response.data;
-      });
-    },
-    initializeTourCreation() {
-      this.tourCreatedSuccessfully = 2;
+    initializeHotelCreation() {
+      this.hotelCreatedSuccessfully = 2;
     },
   },
-  mounted() {
-    this.getTourCategoryFromBd();
-  },
+  mounted() {},
 };

@@ -1,4 +1,4 @@
-import Tour from "../services/tour-request.js";
+import Resto from "../services/resto-request.js";
 
 export default {
   data() {
@@ -11,10 +11,9 @@ export default {
       picture: "",
       description: "",
       address: "",
-      languages: [],
       openDaysHours: [],
       partnerId: 0,
-      tourCategoryId: 0,
+      restoCategoryId: 0,
       monSt: "",
       tueSt: "",
       wedSt: "",
@@ -29,12 +28,12 @@ export default {
       friEn: "",
       satEn: "",
       sunEn: "",
-      tourCategoryFromBd: "",
-      tourCreatedSuccessfully: 2,
+      restoCategoryFromBd: "",
+      restoCreatedSuccessfully: 2,
     };
   },
   methods: {
-    addTour() {
+    addResto() {
       var openDaysHours = {
         monSt: this.monSt,
         tueSt: this.tueSt,
@@ -51,38 +50,38 @@ export default {
         satEn: this.satEn,
         sunEn: this.sunEn,
       };
-      Tour.addTour({
+      Resto.addResto({
         name: this.name,
         price: this.price,
         visit_hour: this.visitHour,
         longitude: this.longitude,
         latitude: this.latitude,
-        tour_category_id: this.tourCategoryId,
+        resto_category_id: this.restoCategoryId,
         picture: this.picture,
         description: this.description,
         address: this.address,
-        languages: this.languages.toString(),
+        table_price: this.price,
         open_days_hours: JSON.stringify(openDaysHours),
         partner_id: sessionStorage.getItem("partnerId"),
       })
         .then(() => {
-          this.tourCreatedSuccessfully = 1;
+          this.restoCreatedSuccessfully = 1;
         })
         .catch(() => {
-          this.tourCreatedSuccessfully = 0;
+          this.restoCreatedSuccessfully = 0;
         });
     },
-    getTourCategoryFromBd() {
-      Tour.getTourCategories().then((response) => {
-        //console.log(response.data);
-        this.tourCategoryFromBd = response.data;
+    getRestoCategoryFromBd() {
+      Resto.getRestoCategories().then((response) => {
+        console.log(response.data);
+        this.restoCategoryFromBd = response.data;
       });
     },
-    initializeTourCreation() {
-      this.tourCreatedSuccessfully = 2;
+    initializeRestoCreation() {
+      this.restoCreatedSuccessfully = 2;
     },
   },
   mounted() {
-    this.getTourCategoryFromBd();
+    this.getRestoCategoryFromBd();
   },
 };

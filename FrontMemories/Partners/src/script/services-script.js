@@ -23,6 +23,7 @@ const tableColumnsResto = [
 ];
 const tableColumnsHotel = [
   "Id",
+  "Nom",
   "Chambres",
   "Adresse",
   "Categories",
@@ -51,9 +52,9 @@ export default {
     serviceInfo() {
       Service.tourService(sessionStorage.getItem("partnerId")).then(
         (response) => {
-          var tours = response.data["data"];
-          var counter = 1;
-          for (var index in tours) {
+          let tours = response.data["data"];
+          let counter = 1;
+          for (let index in tours) {
             this.tableDataTour.push({
               id: counter,
               nom: tours[index].name,
@@ -78,14 +79,14 @@ export default {
       );
       Service.hotelService(sessionStorage.getItem("partnerId")).then(
         (response) => {
-          var hotels = response.data["data"];
-          var counter = 1;
-          var numberOfRooms = 0;
-          var numberOfRoomsCategories = 0;
+          let hotels = response.data["data"];
+          let counter = 1;
+          let numberOfRooms = 0;
+          let numberOfRoomsCategories = 0;
           //get the number of rooms
           for (var index = 0; index < hotels.length; index++) {
             for (
-              var indexa = 0;
+              let indexa = 0;
               indexa < hotels[index].room_categories.length;
               indexa++
             ) {
@@ -95,11 +96,11 @@ export default {
           }
           //get the number of categorires of rooms
 
-          for (var index = 0; index < hotels.length; index++) {
+          for (let index = 0; index < hotels.length; index++) {
             numberOfRoomsCategories += hotels[index].room_categories.length;
           }
 
-          for (var index in hotels) {
+          for (index in hotels) {
             this.tableDataHotel.push({
               id: counter,
               nom: hotels[index].name,

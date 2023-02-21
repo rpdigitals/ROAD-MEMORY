@@ -24,8 +24,7 @@
                 />
               </td>
               <td>
-                <i class="ti-eye btn btn-success"></i
-                ><i class="ti-trash btn btn-danger"></i>
+                <i class="ti-eye btn btn-info"></i><i class="ti-trash btn btn-danger"></i>
               </td>
             </slot>
           </tr>
