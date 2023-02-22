@@ -17,14 +17,30 @@
                 {{ itemValue(item, column) }}
               </td>
               <td>
+                <!-- <span>
+                   src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+              </span> -->
                 <img
-                  src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
+                  :src="'http://localhost:8000/' + item.image"
                   alt=""
                   width="70px"
                 />
               </td>
               <td>
-                <i class="ti-eye btn btn-info"></i><i class="ti-trash btn btn-danger"></i>
+                <button
+                  class="ti-eye btn btn-info"
+                  @click="editService(item.idBD, item.site)"
+                ></button>
+                <button
+                  class="ti-trash btn btn-danger"
+                  @click="deleteTour(item.idBD)"
+                >
+                  <!-- <drop-down class="nav-item" icon="ti-bell">
+                    <a class="dropdown-item" href="#" style="z-index: 100"
+                      >Notification 1</a
+                    >
+                  </drop-down> -->
+                </button>
               </td>
             </slot>
           </tr>
@@ -34,6 +50,7 @@
   </div>
 </template>
 <script>
+import Tour from "../services/tour-request.js";
 export default {
   name: "paper-table",
   props: {
@@ -63,6 +80,59 @@ export default {
     },
     itemValue(item, column) {
       return item[column.toLowerCase()];
+    },
+    deleteTour(identifier) {
+      identifier;
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger",
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: "Êtes vous sûres ?",
+          text: "Cet action sera irreversible!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "OUI, Supprimer!",
+          cancelButtonText: "Non, Annuler!",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            Tour.deleteTour(identifier)
+              .then((response) => {
+                swalWithBootstrapButtons.fire(
+                  "Supprimé!",
+                  "Ce site a été suprimé.",
+                  "success"
+                );
+                location.reload();
+              })
+              .catch((error) => {
+                swalWithBootstrapButtons.fire(
+                  "Desolé !",
+                  "Une erreur s'est produite",
+                  "Verifiez votre connexion et réessayez ."
+                );
+              });
+          } else {
+            swalWithBootstrapButtons.fire(
+              "Annulé !",
+              "Vos données sont toujours disponible"
+            );
+          }
+        });
+    },
+    editService(service, site) {
+      sessionStorage.setItem("tourToEdit", service);
+      sessionStorage.setItem("hotelToEdit", service);
+      sessionStorage.setItem("carToEdit", service);
+      sessionStorage.setItem("restoToEdit", service);
+      this.$router.push(`/edit-service/${service}/${site}`);
     },
   },
 };

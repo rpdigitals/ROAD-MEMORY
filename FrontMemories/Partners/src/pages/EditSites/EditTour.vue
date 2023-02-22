@@ -1,19 +1,37 @@
 <style></style>
 
 <template>
-  <card class="card" title="Ajouter un Hotel">
+  <card class="card" title="Mise à jour du site">
     <div>
-      <form @submit.prevent="addHotel">
+      <form @submit.prevent="editTour" enctype="mutipart/form-data">
         <div v-if="carForm == 0">
-          <form @submit.prevent="carForm = 1">
+          <form @submit="carForm = 1">
             <div class="row">
               <div class="col-md-4">
                 <fg-input
                   type="text"
-                  label="Nom de l'hotel"
-                  placeholder="ex : Hotel 2 Fevrier"
-                  required
+                  label="Nom du site"
+                  placeholder="ex : Faille Aledjo"
                   v-model="name"
+                >
+                </fg-input>
+              </div>
+              <div class="col-md-4">
+                <fg-input
+                  type="number"
+                  label="Prix de visite ( xof )"
+                  placeholder="10000"
+                  v-model="price"
+                >
+                </fg-input>
+              </div>
+              <div class="col-md-4">
+                <fg-input
+                  type="number"
+                  label="Durée de visite ( h )"
+                  placeholder="3h"
+                  v-model="visitHour"
+                  min="1"
                 >
                 </fg-input>
               </div>
@@ -25,7 +43,6 @@
                   type="text"
                   label="Longitude"
                   placeholder="2°"
-                  required
                   v-model="longitude"
                 >
                 </fg-input>
@@ -35,33 +52,66 @@
                   type="text"
                   label="Latitude"
                   placeholder="3°"
-                  required
                   v-model="latitude"
                 >
                 </fg-input>
+              </div>
+              <div class="col-md-4">
+                <label for="">Categorie</label>
+                <select class="form-control" v-model="tourCategoryId">
+                  <option
+                    :value="tourCategory.id"
+                    v-for="tourCategory in tourCategoryFromBd"
+                    :key="tourCategory.id"
+                  >
+                    {{ tourCategory.type }}
+                  </option>
+                </select>
               </div>
             </div>
             <div class="row">
               <div class="col-md-4">
                 <fg-input
+                  ref="fileInput"
                   type="file"
                   label="Image"
+                  onchange="previewPicture(this)"
                   placeholder="image"
                   accept="image/*"
-                  required
                   v-model="picture"
                 >
                 </fg-input>
+                <img
+                  src="#"
+                  alt=""
+                  id="image"
+                  style="max-width: 500px; margin-top: 20px"
+                />
+              </div>
+
+              <div class="col-md-4">
+                <fg-input type="text" label="Adresse" v-model="address">
+                </fg-input>
               </div>
               <div class="col-md-4">
-                <fg-input
-                  type="text"
-                  label="Adresse"
-                  placeholder="Kara ville"
-                  required
-                  v-model="address"
+                <label for="">Langues</label>
+                <select
+                  class="form-control"
+                  multiple
+                  v-model="languages"
+                  max="3"
                 >
-                </fg-input>
+                  <option value="Français">Français</option>
+                  <option value="English">English</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="Deutsh">Deutsh</option>
+                  <option value="Haoussa">Haoussa</option>
+                  <option value="Ewe">Ewe</option>
+                  <option value="Kabye">Kabye</option>
+                  <option value="Kotokoli">Kotokoli</option>
+                  <option value="Autres">Autres</option>
+                </select>
               </div>
             </div>
             <div class="row">
@@ -73,7 +123,6 @@
                     class="form-control border-input"
                     placeholder="Here can be your description"
                     maxlength="1500"
-                    required
                     v-model="description"
                   >
                   </textarea>
@@ -89,7 +138,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="monSt"
                       class="inputtime"
                       type="time"
@@ -98,7 +146,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="monEn"
                       class="inputtime"
                       type="time"
@@ -112,7 +159,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="tueSt"
                       class="inputtime"
                       type="time"
@@ -121,7 +167,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="tueEn"
                       class="inputtime"
                       type="time"
@@ -135,7 +180,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="wedSt"
                       class="inputtime"
                       type="time"
@@ -144,7 +188,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="wedEn"
                       class="inputtime"
                       type="time"
@@ -158,7 +201,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="turSt"
                       class="inputtime"
                       type="time"
@@ -167,7 +209,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="turEn"
                       class="inputtime"
                       type="time"
@@ -181,7 +222,6 @@
                     </span>
                     : De
                     <input
-                      required
                       v-model="friSt"
                       class="inputtime"
                       type="time"
@@ -190,7 +230,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="friEn"
                       class="inputtime"
                       type="time"
@@ -204,7 +243,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="satSt"
                       class="inputtime"
                       type="time"
@@ -213,7 +251,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="satEn"
                       class="inputtime"
                       type="time"
@@ -227,7 +264,6 @@
                     </span>
                     : De
                     <input
-                      required
                       v-model="sunSt"
                       class="inputtime"
                       type="time"
@@ -236,7 +272,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="sunEn"
                       class="inputtime"
                       type="time"
@@ -247,37 +282,37 @@
                 </div>
               </div>
             </div>
+
             <div class="text-center">
               <button type="submit" class="btn-info" style="font-size: 45px">
                 <i class="ti-arrow-right"></i>
               </button>
             </div>
-            <div class="clearfix"></div>
           </form>
         </div>
         <div class="clearfix"></div>
         <div v-if="carForm == 1">
           <strong style="font-size: 18px">
-            Caracteristiques et facilités de l'hotel
+            Caracteristiques et facilités du site
           </strong>
           <div class="row">
             <div class="col-md-4">
-              <label for="">Wifi gratuit</label>
-              <select class="form-control" v-model="wifi">
+              <label for="">Guide touristique</label>
+              <select class="form-control" v-model="tourGuide">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
             </div>
             <div class="col-md-4">
-              <label for="">Ecran plasma disponible</label>
-              <select class="form-control" v-model="plasmaTv">
+              <label for="">Animaux de compagnie autorisés</label>
+              <select class="form-control" v-model="animals">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
             </div>
             <div class="col-md-4">
-              <label for="">Piscine</label>
-              <select class="form-control" v-model="swimmingPool">
+              <label for="">Dinner offert</label>
+              <select class="form-control" v-model="dinner">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
@@ -286,60 +321,51 @@
           <div class="row">
             <div class="col-md-4">
               <label for="">Cigarettes autorisés</label>
-              <select class="form-control" v-model="smokeArea" required>
+              <select class="form-control" v-model="smokeArea">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
             </div>
             <div class="col-md-4">
-              <label for="">Animaux de compagnie</label>
-              <select class="form-control" v-model="pet" required>
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="">Salle de GYM</label>
-              <select class="form-control" v-model="fitnessCenter">
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="">Restaurant</label>
-              <select class="form-control" v-model="restaurant">
-                <option value="1">Oui</option>
-                <option value="0">Non</option>
-              </select>
-            </div>
-            <div class="col-md-4">
-              <label for="">Parking</label>
-              <select class="form-control" v-model="parking">
+              <label for="">Visite enfants gratuite</label>
+              <select class="form-control" v-model="children">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
             </div>
           </div>
-
+          <div
+            class="alert alert-success text-center"
+            style="font-size: 20px"
+            v-if="tourEditedSuccessfully == 1"
+          >
+            <!-- <strong> Site crée avec succès </strong>
+            <strong>
+              <router-link to="/services" class="btn btn-success"
+                >OK</router-link
+              >
+            </strong> -->
+          </div>
           <div
             class="alert alert-danger text-center"
             style="font-size: 20px"
-            v-if="hotelCreatedSuccessfully == 0"
+            v-if="tourEditedSuccessfully == 0"
           >
             <strong>
               Une erreur s'est produite. Vérifiez votre connexion et réessayez
             </strong>
             <strong>
-              <button @click="resetHotelCreation" class="btn">OK</button>
+              <button @click="resetTourEditing" class="btn">OK</button>
             </strong>
           </div>
           <div class="text-center">
             <button
               type="submit"
+              @click="carForm == 0"
               class="btn-info"
-              v-if="hotelCreatedSuccessfully == 2"
+              v-if="tourEditedSuccessfully == 2"
             >
-              CREER
+              MODIFIER
             </button>
           </div>
           <div class="clearfix"></div>
@@ -348,7 +374,7 @@
     </div>
   </card>
 </template>
-<script src="../../script/add-hotel.js"></script>
+<script src="../../script/edit-tour.js"></script>
 <style scoped>
 .day {
   display: block;

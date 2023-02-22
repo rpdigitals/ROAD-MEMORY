@@ -3,6 +3,7 @@ import Tour from "../services/tour-request.js";
 export default {
   data() {
     return {
+      //tour info
       name: "",
       price: 0,
       visitHour: "",
@@ -29,6 +30,15 @@ export default {
       friEn: "",
       satEn: "",
       sunEn: "",
+      //tour Id after creating the tour
+      tourId: 0,
+      //caracteristics
+      carForm: 0,
+      children: "",
+      smokeArea: "",
+      animals: "",
+      tourGuide: "",
+      dinner: "",
       tourCategoryFromBd: "",
       tourCreatedSuccessfully: 2,
     };
@@ -51,6 +61,7 @@ export default {
         satEn: this.satEn,
         sunEn: this.sunEn,
       };
+
       Tour.addTour({
         name: this.name,
         price: this.price,
@@ -65,21 +76,46 @@ export default {
         open_days_hours: JSON.stringify(openDaysHours),
         partner_id: sessionStorage.getItem("partnerId"),
       })
-        .then(() => {
+        .then((response) => {
           this.tourCreatedSuccessfully = 1;
+          this.tourId = response.data.tour_id;
+          this.addTourCaracteristiques();
+          this.tourCreatedSuccessfull();
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
           this.tourCreatedSuccessfully = 0;
         });
     },
+    addTourCaracteristiques() {
+      Tour.addTourCaracteristics({
+        children: this.children,
+        smoke_area: this.smokeArea,
+        animals: this.animals,
+        tour_guide: this.tourGuide,
+        dinner: this.dinner,
+        tour_id: this.tourId,
+      });
+    },
+
     getTourCategoryFromBd() {
       Tour.getTourCategories().then((response) => {
         //console.log(response.data);
         this.tourCategoryFromBd = response.data;
       });
     },
-    initializeTourCreation() {
+    resetTourCreation() {
       this.tourCreatedSuccessfully = 2;
+    },
+    tourCreatedSuccessfull() {
+      this.$swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Site ajouté avec succès",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.$router.push("/services");
     },
   },
   mounted() {

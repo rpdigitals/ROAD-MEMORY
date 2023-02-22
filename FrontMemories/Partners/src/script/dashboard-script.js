@@ -61,21 +61,21 @@ export default {
     serviceInfo() {
       Dashboard.service(sessionStorage.getItem("partnerId")).then(
         (response) => {
-          var numberOfServices =
-            response.data.hotels.length +
-            response.data.restos.length +
-            response.data.tours.length +
-            response.data.cars.length;
-          this.statsCards[0].value = numberOfServices;
+          // var numberOfServices =
+          //   response.data.hotels.length +
+          //   response.data.restos.length +
+          //   response.data.tours.length +
+          //   response.data.cars.length;
+          this.statsCards[0].value = response.data;
         }
       );
     },
     // register(){
     //   Dashboard.register({
-    //     name:"Second Partner",
-    //     email:"secondpartner@gmail.com",
-    //     password:"secondpartner"
-    //   }).then((response) => { console.log(response.data)})  
+    //     name:"Third Partner",
+    //     email:"third@partner.com",
+    //     password:"thirdpartner"
+    //   }).then((response) => { console.log(response.data)})
     // }
   },
   mounted() {

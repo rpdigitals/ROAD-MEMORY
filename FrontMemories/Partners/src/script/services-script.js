@@ -53,10 +53,12 @@ export default {
       Service.tourService(sessionStorage.getItem("partnerId")).then(
         (response) => {
           let tours = response.data["data"];
+
           let counter = 1;
           for (let index in tours) {
             this.tableDataTour.push({
               id: counter,
+              idBD: tours[index].id,
               nom: tours[index].name,
               categorie: tours[index].category.type,
               langues: tours[index].languages,
@@ -66,9 +68,12 @@ export default {
               image: tours[index].picture,
               note: tours[index].score,
               identifier: tours[index].id,
+              site: "tour",
             });
+
             counter++;
           }
+
           this.table1 = {
             title: "Sites Touristiques",
             subTitle: "",
@@ -111,6 +116,7 @@ export default {
               image: hotels[index].picture,
               note: hotels[index].note,
               identifier: hotels[index].id,
+              site: "hotel",
             });
             counter++;
           }
@@ -138,6 +144,7 @@ export default {
               image: resto[index].picture,
               note: resto[index].note,
               identifier: resto[index].id,
+              site: "resto",
             });
             counter++;
           }
@@ -153,7 +160,7 @@ export default {
       Service.carService(sessionStorage.getItem("partnerId")).then(
         (response) => {
           "Id", "Nom", "Prix", "Marque", "image";
-          console.log(response.data["data"]);
+
           var car = response.data["data"];
           var counter = 1;
           for (var index in car) {
@@ -164,6 +171,7 @@ export default {
               marque: car[index].brand,
               image: car[index].picture1,
               identifier: car[index].id,
+              site: "car",
             });
             counter++;
           }

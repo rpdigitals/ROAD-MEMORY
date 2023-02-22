@@ -348,7 +348,7 @@
     </div>
   </card>
 </template>
-<script src="../../script/add-hotel.js"></script>
+<script src="../../script/edit-hotel.js"></script>
 <style scoped>
 .day {
   display: block;

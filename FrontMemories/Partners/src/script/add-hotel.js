@@ -26,6 +26,18 @@ export default {
       satEn: "",
       sunEn: "",
       hotelCreatedSuccessfully: 2,
+      //hotelId after creating the hotel      hotelId: 0,
+      //caracteristics
+      carForm: 0,
+      wifi: "",
+      plasmaTv: "",
+      swimmingPool: "",
+      fitnessCenter: "",
+      restaurant: "",
+      parking: "",
+      smokeArea: "",
+      pet: "",
+      hotelCreatedSuccessfully: 2,
     };
   },
   methods: {
@@ -57,15 +69,48 @@ export default {
         open_days_hours: JSON.stringify(openDaysHours),
         partner_id: sessionStorage.getItem("partnerId"),
       })
-        .then(() => {
+        .then((response) => {
           this.hotelCreatedSuccessfully = 1;
+          this.hotelId = response.data.hotel_id;
+          this.addHotelCaracteristic();
+          this.hotelCreatedSuccessfull();
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           this.hotelCreatedSuccessfully = 0;
         });
     },
     initializeHotelCreation() {
       this.hotelCreatedSuccessfully = 2;
+    },
+    addHotelCaracteristic() {
+      Hotel.addHotelCaracteristics({
+        wifi: this.wifi,
+        plasma_tv: this.plasmaTv,
+        swimming_pool: this.swimmingPool,
+        fitness_center: this.fitnessCenter,
+        restaurant: this.restaurant,
+        parking: this.parking,
+        smoke_area: this.smokeArea,
+        pet: this.pet,
+        hotel_id: this.hotelId,
+      }).then((response) => {
+        console.log(response.data);
+      });
+    },
+
+    resetHotelCreation() {
+      this.hotelCreatedSuccessfully = 2;
+    },
+    hotelCreatedSuccessfull() {
+      this.$swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Hotel ajouté avec succès",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.$router.push("/services");
     },
   },
   mounted() {},

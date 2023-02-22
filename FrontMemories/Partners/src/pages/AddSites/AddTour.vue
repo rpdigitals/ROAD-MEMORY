@@ -3,322 +3,399 @@
 <template>
   <card class="card" title="Ajouter un site touristique">
     <div>
-      <form @submit.prevent="addTour">
-        <div class="row">
-          <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Nom du site"
-              placeholder="ex : Faille Aledjo"
-              required
-              v-model="name"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="number"
-              label="Prix de visite ( xof )"
-              placeholder="10000"
-              required
-              v-model="price"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="number"
-              label="Durée de visite ( h )"
-              placeholder="3h"
-              required
-              v-model="visitHour"
-              min="1"
-            >
-            </fg-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Longitude"
-              placeholder="2°"
-              required
-              v-model="longitude"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Latitude"
-              placeholder="3°"
-              required
-              v-model="latitude"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <label for="">Categorie</label>
-            <select class="form-control" required v-model="tourCategoryId">
-              <option
-                :value="tourCategory.id"
-                v-for="tourCategory in tourCategoryFromBd"
-                :key="tourCategory.id"
-              >
-                {{ tourCategory.type }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <fg-input
-              type="file"
-              label="Image"
-              placeholder="image"
-              accept="image/*"
-              required
-              v-model="picture"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Adresse"
-              placeholder="Kara ville"
-              required
-              v-model="address"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <label for="">Langues</label>
-            <select class="form-control" multiple required v-model="languages">
-              <option value="Français">Français</option>
-              <option value="English">English</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Spanish">Spanish</option>
-              <option value="Deutsh">Deutsh</option>
-              <option value="Haoussa">Haoussa</option>
-              <option value="Ewe">Ewe</option>
-              <option value="Kabye">Kabye</option>
-              <option value="Kotokoli">Kotokoli</option>
-              <option value="Autres">Autres</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Description de site</label>
-              <textarea
-                rows="10"
-                class="form-control border-input"
-                placeholder="Here can be your description"
-                maxlength="1500"
-                required
-                v-model="description"
-              >
-              </textarea>
-            </div>
-          </div>
-          <div class="col-md-1"></div>
-          <div class="col-md-5">
-            <div class="form-group ms-50">
-              <label>Horaires</label> <br />
-              <div class="time">
-                <span class="day text-secondary text-secondary"
-                  ><span class="textDay">Lundi </span></span
+      <form @submit.prevent="addTour" enctype="mutipart/form-data">
+        <div v-if="carForm == 0">
+          <form @submit="carForm = 1">
+            <div class="row">
+              <div class="col-md-4">
+                <fg-input
+                  type="text"
+                  label="Nom du site"
+                  placeholder="ex : Faille Aledjo"
+                  required
+                  v-model="name"
                 >
-                : De
-                <input
-                  required
-                  v-model="monSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="monEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
+                </fg-input>
               </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Mardi </span></span
+              <div class="col-md-4">
+                <fg-input
+                  type="number"
+                  label="Prix de visite ( xof )"
+                  placeholder="10000"
+                  required
+                  v-model="price"
                 >
-                : De
-                <input
-                  required
-                  v-model="tueSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="tueEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
+                </fg-input>
               </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Mercredi</span></span
+              <div class="col-md-4">
+                <fg-input
+                  type="number"
+                  label="Durée de visite ( h )"
+                  placeholder="3h"
+                  required
+                  v-model="visitHour"
+                  min="1"
                 >
-                : De
-                <input
-                  required
-                  v-model="wedSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="wedEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-              </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Jeudi </span></span
-                >
-                : De
-                <input
-                  required
-                  v-model="turSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="turEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-              </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Vendredi</span>
-                </span>
-                : De
-                <input
-                  required
-                  v-model="friSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="friEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-              </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Samedi </span></span
-                >
-                : De
-                <input
-                  required
-                  v-model="satSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                <input
-                  required
-                  v-model="satEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-              </div>
-              <div class="time">
-                <span class="day text-secondary"
-                  ><span class="textDay">Dimanche</span>
-                </span>
-                : De
-                <input
-                  required
-                  v-model="sunSt"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
-                A
-                <input
-                  required
-                  v-model="sunEn"
-                  class="inputtime"
-                  type="time"
-                  name=""
-                  id=""
-                />
+                </fg-input>
               </div>
             </div>
-          </div>
-        </div>
-        <div
-          class="alert alert-success text-center"
-          style="font-size: 20px"
-          v-if="tourCreatedSuccessfully == 1"
-        >
-          <strong> Site crée avec succès </strong>
-          <strong>
-            <router-link to="/services" class="btn btn-success">OK</router-link>
-          </strong>
-        </div>
-        <div
-          class="alert alert-danger text-center"
-          style="font-size: 20px"
-          v-if="tourCreatedSuccessfully == 0"
-        >
-          <strong>
-            Une erreur s'est produite. Vérifiez votre connexion et réessayez
-          </strong>
-          <strong>
-            <button @click="initializeTourCreation" class="btn">OK</button>
-          </strong>
-        </div>
 
-        <div class="text-center">
-          <button type="submit" class="btn-info">CONTINUER</button>
+            <div class="row">
+              <div class="col-md-4">
+                <fg-input
+                  type="text"
+                  label="Longitude"
+                  placeholder="2°"
+                  required
+                  v-model="longitude"
+                >
+                </fg-input>
+              </div>
+              <div class="col-md-4">
+                <fg-input
+                  type="text"
+                  label="Latitude"
+                  placeholder="3°"
+                  required
+                  v-model="latitude"
+                >
+                </fg-input>
+              </div>
+              <div class="col-md-4">
+                <label for="">Categorie</label>
+                <select class="form-control" required v-model="tourCategoryId">
+                  <option
+                    :value="tourCategory.id"
+                    v-for="tourCategory in tourCategoryFromBd"
+                    :key="tourCategory.id"
+                  >
+                    {{ tourCategory.type }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <fg-input
+                  ref="fileInput"
+                  type="file"
+                  label="Image"
+                  onchange="previewPicture(this)"
+                  placeholder="image"
+                  accept="image/*"
+                  required
+                  v-model="picture"
+                >
+                </fg-input>
+                <img
+                  src="#"
+                  alt=""
+                  id="image"
+                  style="max-width: 500px; margin-top: 20px"
+                />
+              </div>
+              <div class="col-md-4">
+                <fg-input
+                  type="text"
+                  label="Adresse"
+                  placeholder="Kara ville"
+                  required
+                  v-model="address"
+                >
+                </fg-input>
+              </div>
+              <div class="col-md-4">
+                <label for="">Langues</label>
+                <select
+                  class="form-control"
+                  multiple
+                  required
+                  v-model="languages"
+                  max="3"
+                >
+                  <option value="Français">Français</option>
+                  <option value="English">English</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="Deutsh">Deutsh</option>
+                  <option value="Haoussa">Haoussa</option>
+                  <option value="Ewe">Ewe</option>
+                  <option value="Kabye">Kabye</option>
+                  <option value="Kotokoli">Kotokoli</option>
+                  <option value="Autres">Autres</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Description de site</label>
+                  <textarea
+                    rows="10"
+                    class="form-control border-input"
+                    placeholder="Here can be your description"
+                    maxlength="1500"
+                    required
+                    v-model="description"
+                  >
+                  </textarea>
+                </div>
+              </div>
+              <div class="col-md-1"></div>
+              <div class="col-md-5">
+                <div class="form-group ms-50">
+                  <label>Horaires</label> <br />
+                  <div class="time">
+                    <span class="day text-secondary text-secondary"
+                      ><span class="textDay">Lundi </span></span
+                    >
+                    : De
+                    <input
+                      required
+                      v-model="monSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="monEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Mardi </span></span
+                    >
+                    : De
+                    <input
+                      required
+                      v-model="tueSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="tueEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Mercredi</span></span
+                    >
+                    : De
+                    <input
+                      required
+                      v-model="wedSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="wedEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Jeudi </span></span
+                    >
+                    : De
+                    <input
+                      required
+                      v-model="turSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="turEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Vendredi</span>
+                    </span>
+                    : De
+                    <input
+                      required
+                      v-model="friSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="friEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Samedi </span></span
+                    >
+                    : De
+                    <input
+                      required
+                      v-model="satSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    <input
+                      required
+                      v-model="satEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                  <div class="time">
+                    <span class="day text-secondary"
+                      ><span class="textDay">Dimanche</span>
+                    </span>
+                    : De
+                    <input
+                      required
+                      v-model="sunSt"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                    A
+                    <input
+                      required
+                      v-model="sunEn"
+                      class="inputtime"
+                      type="time"
+                      name=""
+                      id=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn-info" style="font-size: 45px">
+                <i class="ti-arrow-right"></i>
+              </button>
+            </div>
+          </form>
         </div>
         <div class="clearfix"></div>
+        <div v-if="carForm == 1">
+          <strong style="font-size: 18px">
+            Caracteristiques et facilités du site
+          </strong>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="">Guide touristique</label>
+              <select class="form-control" v-model="tourGuide">
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="">Animaux de compagnie autorisés</label>
+              <select class="form-control" v-model="animals">
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="">Dinner offert</label>
+              <select class="form-control" v-model="dinner">
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="">Cigarettes autorisés</label>
+              <select class="form-control" v-model="smokeArea" required>
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="">Visite enfants gratuite</label>
+              <select class="form-control" v-model="children">
+                <option value="1">Oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="alert alert-success text-center"
+            style="font-size: 20px"
+            v-if="tourCreatedSuccessfully == 1"
+          >
+            <!-- <strong> Site crée avec succès </strong>
+            <strong>
+              <router-link to="/services" class="btn btn-success"
+                >OK</router-link
+              >
+            </strong> -->
+          </div>
+          <div
+            class="alert alert-danger text-center"
+            style="font-size: 20px"
+            v-if="tourCreatedSuccessfully == 0"
+          >
+            <strong>
+              Une erreur s'est produite. Vérifiez votre connexion et réessayez
+            </strong>
+            <strong>
+              <button @click="resetTourCreation" class="btn">OK</button>
+            </strong>
+          </div>
+          <div class="text-center">
+            <button
+              type="submit"
+              @click="carForm == 0"
+              class="btn-info"
+              v-if="tourCreatedSuccessfully == 2"
+            >
+              CREER
+            </button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
       </form>
     </div>
   </card>
