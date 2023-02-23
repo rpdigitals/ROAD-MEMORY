@@ -30,6 +30,14 @@ export default {
       sunEn: "",
       restoCategoryFromBd: "",
       restoCreatedSuccessfully: 2,
+      //caracteristics
+      wifi: "",
+      parking: "",
+      smokeArea: "",
+      pet: "",
+      //id after creating the resto
+      restoId: "",
+      carForm: 0,
     };
   },
   methods: {
@@ -64,11 +72,29 @@ export default {
         open_days_hours: JSON.stringify(openDaysHours),
         partner_id: sessionStorage.getItem("partnerId"),
       })
-        .then(() => {
+        .then((response) => {
           this.restoCreatedSuccessfully = 1;
+          this.restoId = response.data.resto_id;
+          this.addRestoCaracteristiques();
+          this.restoCreatedSuccessfull();
         })
-        .catch(() => {
+        .catch((error) => {
           this.restoCreatedSuccessfully = 0;
+        });
+    },
+    addRestoCaracteristiques() {
+      Resto.addRestoCaracteristics({
+        smoke_area: this.smokeArea,
+        wifi: this.wifi,
+        parking: this.parking,
+        pet: this.pet,
+        resto_id: this.restoId,
+      })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     getRestoCategoryFromBd() {
@@ -77,7 +103,20 @@ export default {
         this.restoCategoryFromBd = response.data;
       });
     },
+    restoCreatedSuccessfull() {
+      this.$swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Resto ajouté avec succès",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.$router.push("/services");
+    },
     initializeRestoCreation() {
+      this.restoCreatedSuccessfully = 2;
+    },
+    resetRestoCreation() {
       this.restoCreatedSuccessfully = 2;
     },
   },

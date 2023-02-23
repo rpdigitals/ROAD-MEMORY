@@ -14,162 +14,182 @@ use App\Http\Controllers\Controller;
 use App\Models\Tour\TourCaracteristic;
 use App\Http\Resources\Tour as TourResource;
 
-class TourController extends Controller {
+class TourController extends Controller
+{
 
-    public function createTour( Request $request ) {
-        Tour::create( $request->all() );
-        return response()->json( [
+    public function createTour(Request $request)
+    {
+        $tour = Tour::create($request->all());
+        return response()->json([
             'success' => true,
-            'message' => 'Tour created successfully'
-        ] );
+            'message' => 'Tour created successfully',
+            'tour_id' => $tour->id,
+        ]);
     }
 
-    public function updateTour( Request $request, $id ) {
-        Tour::where( 'id', $id )->update( $request->all() );
-        return response()->json( [
+    public function updateTour(Request $request, $id)
+    {
+        $tour = Tour::where('id', $id)->first();
+        $tour->update($request->except('picture'));
+        return response()->json([
             'success' => true,
-            'message' => 'Tour updated successfully'
-        ] );
+            'message' => 'Tour updated successfully',
+            'tour_id' => $tour->id
+        ]);
     }
 
-    public function deleteTour( $id ) {
-        return Tour::where( 'id', $id )->first()->partner()->subscription();
-
-        Tour::where( 'id', $id )->update( [
-            'status'=>0
-        ] );
-        return response()->json( [
+    public function deleteTour($id)
+    {
+        Tour::where('id', $id)->update([
+            'status' => 0
+        ]);
+        return response()->json([
             'success' => true,
             'message' => 'Tour deleted successfully'
-        ] );
+        ]);
     }
 
-    public function createTourCaracteristic( Request $request ) {
-        TourCaracteristic::create( $request->all() );
-        return response()->json( [
+    public function createTourCaracteristic(Request $request)
+    {
+        TourCaracteristic::create($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'TourCaracteristic created successfully'
-        ] );
+        ]);
     }
 
-    public function updateTourCaracteristic( Request $request, $id ) {
-        TourCaracteristic::where( 'id', $id )->update( $request->all() );
-        return response()->json( [
+    public function updateTourCaracteristic(Request $request, $id)
+    {
+        TourCaracteristic::where('tour_id', $id)->first()->update($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'TourCaracteristic updated successfully'
-        ] );
+        ]);
     }
 
-    public function createTourNews( Request $request ) {
-        TourNews::create( $request->all() );
-        return response()->json( [
+    public function createTourNews(Request $request)
+    {
+        TourNews::create($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'TourNews created successfully'
-        ] );
+        ]);
     }
 
-    public function updateTourNews( Request $request, $id ) {
-        TourNews::where( 'id', $id )->update( $request->all() );
-        return response()->json( [
+    public function updateTourNews(Request $request, $id)
+    {
+        TourNews::where('id', $id)->update($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'TourNews updated successfully'
-        ] );
+        ]);
     }
 
-    public function deleteTourNews( $id ) {
-        TourNews::where( 'id', $id )->update( [
-            'status'=>0
-        ] );
-        return response()->json( [
+    public function deleteTourNews($id)
+    {
+        TourNews::where('id', $id)->update([
+            'status' => 0
+        ]);
+        return response()->json([
             'success' => true,
             'message' => 'TourNews deleted successfully'
-        ] );
+        ]);
     }
 
-    public function allTourNews() {
-        return TourNews::where( 'status', 1 )->orderBy( 'created_at', 'DESC' )->get();
+    public function allTourNews()
+    {
+        return TourNews::where('status', 1)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function createTrek( Request $request ) {
-        Trek::create( $request->all() );
-        return response()->json( [
+    public function createTrek(Request $request)
+    {
+        Trek::create($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'Trek created successfully'
-        ] );
+        ]);
     }
 
-    public function updateTrek( Request $request, $id ) {
-        Trek::where( 'id', $id )->update( $request->all() );
-        return response()->json( [
+    public function updateTrek(Request $request, $id)
+    {
+        Trek::where('id', $id)->update($request->all());
+        return response()->json([
             'success' => true,
             'message' => 'Trek updated successfully'
-        ] );
+        ]);
     }
 
-    public function deleteTrek( $id ) {
-        Trek::where( 'id', $id )->update( [
-            'status'=>0
-        ] );
-        return response()->json( [
+    public function deleteTrek($id)
+    {
+        Trek::where('id', $id)->update([
+            'status' => 0
+        ]);
+        return response()->json([
             'success' => true,
             'message' => 'Trek deleted successfully'
-        ] );
+        ]);
     }
 
-    public function allTrek() {
-        return Trek::where( 'status', 1 )->orderBy( 'created_at', 'DESC' )->get();
+    public function allTrek()
+    {
+        return Trek::where('status', 1)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function allTour() {
-        return TourResource::collection( Tour::where( 'status', 1 )->get() );
+    public function allTour()
+    {
+        return TourResource::collection(Tour::where('status', 1)->get());
     }
 
-    public function tourOfCategory( $id ) {
-        return TourResource::collection( Tour::where( 'status', 1 )
-        ->where( 'tour_category_id', $id )
-        ->get() );
+    public function tourOfCategory($id)
+    {
+        return TourResource::collection(Tour::where('status', 1)
+            ->where('tour_category_id', $id)
+            ->get());
 
     }
 
-    public function tourDetail( $id ) {
-        return TourResource::collection( Tour::where( 'status', 1 )
-        ->where( 'id', $id )->get() );
+    public function tourDetail($id)
+    {
+        return TourResource::collection(Tour::where('status', 1)
+            ->where('id', $id)->get());
     }
 
-    public function searchTour( Request $request ) {
-        if ( $request->keyword == '' ) {
-            $tours = TourResource::collection( Tour::
-            where( 'status', 1 )
-            ->get() );
+    public function searchTour(Request $request)
+    {
+        if ($request->keyword == '') {
+            $tours = TourResource::collection(Tour::
+                where('status', 1)
+                ->get());
             return $tours;
         } else {
-            $tours = TourResource::collection( Tour::where( 'name', 'Like', '%'.$request->keyword.'%' )
-            ->where( 'status', 1 )
-            ->get() );
+            $tours = TourResource::collection(Tour::where('name', 'Like', '%' . $request->keyword . '%')
+                ->where('status', 1)
+                ->get());
             return $tours;
         }
 
     }
 
-    public function sortTourbyPrice( $sortOrder ) {
+    public function sortTourbyPrice($sortOrder)
+    {
         $order = 'ASC';
 
-        if ( $sortOrder == 'highest' ) {
+        if ($sortOrder == 'highest') {
             $order = 'DESC';
 
         }
 
-        return TourResource::collection( Tour::where( 'status', 1 )
-        ->orderBy( 'price', $order )
-        ->get() );
+        return TourResource::collection(Tour::where('status', 1)
+            ->orderBy('price', $order)
+            ->get());
 
     }
 
-    public function allTourOfPartner( $id ) {
-        return TourResource::collection( Tour::where( 'status', 1 )
-        ->where( 'partner_id', $id )
-        ->get() );
+    public function allTourOfPartner($id)
+    {
+        return TourResource::collection(Tour::where('status', 1)
+            ->where('partner_id', $id)
+            ->get());
 
     }
 }
-

@@ -26,8 +26,9 @@ export default {
       friEn: "",
       satEn: "",
       sunEn: "",
-      hoteleditedSuccessfully: 2,
-      //hotelId after creating the hotel      hotelId: 0,
+      hotelEditedSuccessfully: 2,
+      //hotelId after editing the hotel
+      hotelId: 0,
       //caracteristics
       carForm: 0,
       wifi: "",
@@ -44,7 +45,7 @@ export default {
     };
   },
   methods: {
-    edithotel() {
+    editHotel() {
       var openDaysHours = {
         monSt: this.monSt,
         tueSt: this.tueSt,
@@ -62,7 +63,7 @@ export default {
         sunEn: this.sunEn,
       };
 
-      Hotel.updateHotel(
+      Hotel.editHotel(
         {
           name: this.name,
           price: this.price,
@@ -77,7 +78,6 @@ export default {
         this.hotelId
       )
         .then((response) => {
-          console.log(response.data);
           this.hotelEditedSuccessfully = 1;
           this.hotelId = response.data.hotel_id;
           this.editHotelCaracteristic();
@@ -89,29 +89,29 @@ export default {
         });
     },
     editHotelCaracteristic() {
-      Hotel.updateHotelCaracteristics(
+      Hotel.editHotelCaracteristics(
         {
           wifi: this.wifi,
-          plasmaTv: this.plasmaTv,
-          swimmingPool: this.swimmingPool,
-          fitnessCenter: this.fitnessCenter,
+          plasma_tv: this.plasmaTv,
+          swimming_pool: this.swimmingPool,
+          fitness_center: this.fitnessCenter,
           restaurant: this.restaurant,
           parking: this.parking,
-          smokeArea: this.smokeArea,
+          smoke_area: this.smokeArea,
           pet: this.pet,
         },
         this.hotelId
       );
     },
 
-    resetHotelEditing() {
+    resetHotelEdition() {
       this.hotelEditedSuccessfully = 2;
     },
     hotelEditedSuccessfull() {
       this.$swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Hotel moifié avec succès",
+        title: "Hotel modifié avec succès",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -120,29 +120,26 @@ export default {
     hotelDetail() {
       Hotel.hotelDetail(sessionStorage.getItem("hotelToEdit")).then(
         (response) => {
-          console.log(response.data["data"][0]);
           let hotelDetails = response.data["data"][0];
-
           //hotel info
           this.name = hotelDetails.name;
-          //this.price = hotelDetails.price;
           this.longitude = hotelDetails.longitude;
           this.latitude = hotelDetails.latitude;
-          //    this.picture = hotelDetails.picture;
+          //  this.picture = hotelDetails.picture;
           this.description = hotelDetails.description;
           this.address = hotelDetails.address;
           this.openDaysHours = JSON.parse(hotelDetails.open_days_hours);
           this.partnerId = hotelDetails.partner_id;
           this.hotelId = hotelDetails.id;
           //caracteristics
-          this.wifi = hotelDetails.caracteristic.wifi;
-          this.plasmaTv = hotelDetails.caracteristic.plasma_tv;
-          this.swimmingPool = hotelDetails.caracteristic.swimming_pool;
-          this.fitnessCenter = hotelDetails.caracteristic.fitness_center;
-          this.restaurant = hotelDetails.caracteristic.restaurant;
-          this.parking = hotelDetails.caracteristic.parking;
-          this.smokeArea = hotelDetails.caracteristic.smoke_area;
-          this.pet = hotelDetails.caracteristic.pet;
+          this.wifi = hotelDetails.caracteristics.wifi;
+          this.plasmaTv = hotelDetails.caracteristics.plasma_tv;
+          this.swimmingPool = hotelDetails.caracteristics.swimming_pool;
+          this.fitnessCenter = hotelDetails.caracteristics.fitness_center;
+          this.restaurant = hotelDetails.caracteristics.restaurant;
+          this.parking = hotelDetails.caracteristics.parking;
+          this.smokeArea = hotelDetails.caracteristics.smoke_area;
+          this.pet = hotelDetails.caracteristics.pet;
 
           this.monSt = this.openDaysHours.monSt;
           this.tueSt = this.openDaysHours.tueSt;

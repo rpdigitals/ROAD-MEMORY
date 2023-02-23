@@ -13,17 +13,20 @@ use App\Http\Resources\Resto as RestoResource;
 
 class RestoController extends Controller {
     public function createResto( Request $request ) {
-        Resto::create( $request->all() );
+       $resto= Resto::create( $request->all() );
         return response()->json( [
             'success' => true,
+            'resto_id' => $resto->id,
             'message' => 'Resto created successfully'
         ] );
     }
 
     public function updateResto( Request $request, $id ) {
-        Resto::where( 'id', $id )->first()->update( $request->all() );
+        $resto=Resto::where( 'id', $id )->first();
+        $resto->update( $request->except('picture') );
         return response()->json( [
             'success' => true,
+            'resto_id' => $resto->id,
             'message' => 'Resto updated successfully'
         ] );
     }
@@ -51,7 +54,7 @@ class RestoController extends Controller {
     }
 
     public function updateRestoCaracteristic( Request $request, $id ) {
-        RestoCaracteristic::where( 'id', $id )->update( $request->all() );
+        RestoCaracteristic::where( 'resto_id', $id )->first()->update( $request->all() );
         return response()->json( [
             'success' => true,
             'message' => 'RestoCaracteristic updated successfully'

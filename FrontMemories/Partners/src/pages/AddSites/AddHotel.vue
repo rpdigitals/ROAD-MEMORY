@@ -339,7 +339,7 @@
               class="btn-info"
               v-if="hotelCreatedSuccessfully == 2"
             >
-              CREER
+              AJOUTER
             </button>
           </div>
           <div class="clearfix"></div>

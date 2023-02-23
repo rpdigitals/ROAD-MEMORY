@@ -25,6 +25,17 @@
             >
             </fg-input>
           </div>
+          <div class="col-md-4">
+            <fg-input
+              type="number"
+              label="Prix ( xof / Jour )"
+              min="1"
+              placeholder="ex : Hyundai"
+              required
+              v-model="price"
+            >
+            </fg-input>
+          </div>
         </div>
 
         <div class="row">

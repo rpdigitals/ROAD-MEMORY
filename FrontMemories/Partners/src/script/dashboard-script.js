@@ -70,13 +70,29 @@ export default {
         }
       );
     },
-    // register(){
-    //   Dashboard.register({
-    //     name:"Third Partner",
-    //     email:"third@partner.com",
-    //     password:"thirdpartner"
-    //   }).then((response) => { console.log(response.data)})
-    // }
+    // register() {
+    //   // Dashboard.register({
+    //   //   name: "First Partner",
+    //   //   email: "first@partner.com",
+    //   //   password: "firstpartner",
+    //   // }).then((response) => {
+    //   //   console.log(response.data);
+    //   // });
+    //   // Dashboard.register({
+    //   //   name: "Second Partner",
+    //   //   email: "second@partner.com",
+    //   //   password: "secondpartner",
+    //   // }).then((response) => {
+    //   //   console.log(response.data);
+    //   // });
+    //   // Dashboard.register({
+    //   //   name: "Third Partner",
+    //   //   email: "third@partner.com",
+    //   //   password: "thirdpartner",
+    //   // }).then((response) => {
+    //   //   console.log(response.data);
+    //   // });
+    // },
   },
   mounted() {
     // this.register();

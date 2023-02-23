@@ -391,7 +391,7 @@
               class="btn-info"
               v-if="tourCreatedSuccessfully == 2"
             >
-              CREER
+              AJOUTER
             </button>
           </div>
           <div class="clearfix"></div>

@@ -1,9 +1,9 @@
 <style></style>
 
 <template>
-  <card class="card" title="Ajouter un Hotel">
+  <card class="card" title="Mise à jour de l'hotel ">
     <div>
-      <form @submit.prevent="addHotel">
+      <form @submit.prevent="editHotel">
         <div v-if="carForm == 0">
           <form @submit.prevent="carForm = 1">
             <div class="row">
@@ -12,7 +12,6 @@
                   type="text"
                   label="Nom de l'hotel"
                   placeholder="ex : Hotel 2 Fevrier"
-                  required
                   v-model="name"
                 >
                 </fg-input>
@@ -25,7 +24,6 @@
                   type="text"
                   label="Longitude"
                   placeholder="2°"
-                  required
                   v-model="longitude"
                 >
                 </fg-input>
@@ -35,7 +33,6 @@
                   type="text"
                   label="Latitude"
                   placeholder="3°"
-                  required
                   v-model="latitude"
                 >
                 </fg-input>
@@ -48,7 +45,6 @@
                   label="Image"
                   placeholder="image"
                   accept="image/*"
-                  required
                   v-model="picture"
                 >
                 </fg-input>
@@ -58,7 +54,6 @@
                   type="text"
                   label="Adresse"
                   placeholder="Kara ville"
-                  required
                   v-model="address"
                 >
                 </fg-input>
@@ -73,7 +68,6 @@
                     class="form-control border-input"
                     placeholder="Here can be your description"
                     maxlength="1500"
-                    required
                     v-model="description"
                   >
                   </textarea>
@@ -89,7 +83,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="monSt"
                       class="inputtime"
                       type="time"
@@ -98,7 +91,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="monEn"
                       class="inputtime"
                       type="time"
@@ -112,7 +104,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="tueSt"
                       class="inputtime"
                       type="time"
@@ -121,7 +112,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="tueEn"
                       class="inputtime"
                       type="time"
@@ -135,7 +125,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="wedSt"
                       class="inputtime"
                       type="time"
@@ -144,7 +133,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="wedEn"
                       class="inputtime"
                       type="time"
@@ -158,7 +146,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="turSt"
                       class="inputtime"
                       type="time"
@@ -167,7 +154,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="turEn"
                       class="inputtime"
                       type="time"
@@ -181,7 +167,6 @@
                     </span>
                     : De
                     <input
-                      required
                       v-model="friSt"
                       class="inputtime"
                       type="time"
@@ -190,7 +175,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="friEn"
                       class="inputtime"
                       type="time"
@@ -204,7 +188,6 @@
                     >
                     : De
                     <input
-                      required
                       v-model="satSt"
                       class="inputtime"
                       type="time"
@@ -213,7 +196,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="satEn"
                       class="inputtime"
                       type="time"
@@ -227,7 +209,6 @@
                     </span>
                     : De
                     <input
-                      required
                       v-model="sunSt"
                       class="inputtime"
                       type="time"
@@ -236,7 +217,6 @@
                     />
                     A
                     <input
-                      required
                       v-model="sunEn"
                       class="inputtime"
                       type="time"
@@ -286,14 +266,14 @@
           <div class="row">
             <div class="col-md-4">
               <label for="">Cigarettes autorisés</label>
-              <select class="form-control" v-model="smokeArea" required>
+              <select class="form-control" v-model="smokeArea">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
             </div>
             <div class="col-md-4">
               <label for="">Animaux de compagnie</label>
-              <select class="form-control" v-model="pet" required>
+              <select class="form-control" v-model="pet">
                 <option value="1">Oui</option>
                 <option value="0">Non</option>
               </select>
@@ -324,22 +304,22 @@
           <div
             class="alert alert-danger text-center"
             style="font-size: 20px"
-            v-if="hotelCreatedSuccessfully == 0"
+            v-if="hotelEditedSuccessfully == 0"
           >
             <strong>
               Une erreur s'est produite. Vérifiez votre connexion et réessayez
             </strong>
             <strong>
-              <button @click="resetHotelCreation" class="btn">OK</button>
+              <button @click="resetHotelEdition" class="btn">OK</button>
             </strong>
           </div>
           <div class="text-center">
             <button
               type="submit"
               class="btn-info"
-              v-if="hotelCreatedSuccessfully == 2"
+              v-if="hotelEditedSuccessfully == 2"
             >
-              CREER
+              MODIFIER
             </button>
           </div>
           <div class="clearfix"></div>

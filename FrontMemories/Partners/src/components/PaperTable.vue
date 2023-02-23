@@ -33,7 +33,7 @@
                 ></button>
                 <button
                   class="ti-trash btn btn-danger"
-                  @click="deleteTour(item.idBD)"
+                  @click="deleteService(item.idBD, item.site)"
                 >
                   <!-- <drop-down class="nav-item" icon="ti-bell">
                     <a class="dropdown-item" href="#" style="z-index: 100"
@@ -51,6 +51,9 @@
 </template>
 <script>
 import Tour from "../services/tour-request.js";
+import Hotel from "../services/hotel-request.js";
+import Resto from "../services/resto-request.js";
+import Car from "../services/car-request.js";
 export default {
   name: "paper-table",
   props: {
@@ -81,51 +84,191 @@ export default {
     itemValue(item, column) {
       return item[column.toLowerCase()];
     },
-    deleteTour(identifier) {
-      identifier;
-      const swalWithBootstrapButtons = this.$swal.mixin({
-        customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
-        },
-        buttonsStyling: false,
-      });
-
-      swalWithBootstrapButtons
-        .fire({
-          title: "Êtes vous sûres ?",
-          text: "Cet action sera irreversible!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "OUI, Supprimer!",
-          cancelButtonText: "Non, Annuler!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            Tour.deleteTour(identifier)
-              .then((response) => {
-                swalWithBootstrapButtons.fire(
-                  "Supprimé!",
-                  "Ce site a été suprimé.",
-                  "success"
-                );
-                location.reload();
-              })
-              .catch((error) => {
-                swalWithBootstrapButtons.fire(
-                  "Desolé !",
-                  "Une erreur s'est produite",
-                  "Verifiez votre connexion et réessayez ."
-                );
-              });
-          } else {
-            swalWithBootstrapButtons.fire(
-              "Annulé !",
-              "Vos données sont toujours disponible"
-            );
-          }
+    deleteService(identifier, site) {
+      if (site == "tour") {
+        identifier;
+        const swalWithBootstrapButtons = this.$swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
         });
+
+        swalWithBootstrapButtons
+          .fire({
+            title: "Êtes vous sûres ?",
+            text: "Cet action sera irreversible!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "OUI, Supprimer!",
+            cancelButtonText: "Non, Annuler!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Tour.deleteTour(identifier)
+                .then((response) => {
+                  swalWithBootstrapButtons.fire(
+                    "Supprimé!",
+                    "Ce site a été suprimé.",
+                    "success"
+                  );
+                  location.reload();
+                })
+                .catch((error) => {
+                  swalWithBootstrapButtons.fire(
+                    "Desolé !",
+                    "Une erreur s'est produite",
+                    "Verifiez votre connexion et réessayez ."
+                  );
+                });
+            } else {
+              swalWithBootstrapButtons.fire(
+                "Annulé !",
+                "Vos données sont toujours disponible"
+              );
+            }
+          });
+      }
+      if (site == "hotel") {
+        identifier;
+        const swalWithBootstrapButtons = this.$swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+          .fire({
+            title: "Êtes vous sûres ?",
+            text: "Cet action sera irreversible!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "OUI, Supprimer!",
+            cancelButtonText: "Non, Annuler!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Car.deleteCar(identifier)
+                .then((response) => {
+                  swalWithBootstrapButtons.fire(
+                    "Supprimé!",
+                    "Cet hotel a été suprimé.",
+                    "success"
+                  );
+                  location.reload();
+                })
+                .catch((error) => {
+                  swalWithBootstrapButtons.fire(
+                    "Desolé !",
+                    "Une erreur s'est produite",
+                    "Verifiez votre connexion et réessayez ."
+                  );
+                });
+            } else {
+              swalWithBootstrapButtons.fire(
+                "Annulé !",
+                "Vos données sont toujours disponible"
+              );
+            }
+          });
+      }
+      if (site == "resto") {
+        identifier;
+        const swalWithBootstrapButtons = this.$swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+          .fire({
+            title: "Êtes vous sûres ?",
+            text: "Cet action sera irreversible!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "OUI, Supprimer!",
+            cancelButtonText: "Non, Annuler!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Resto.deleteResto(identifier)
+                .then((response) => {
+                  swalWithBootstrapButtons.fire(
+                    "Supprimé!",
+                    "Ce Resto a été suprimé.",
+                    "success"
+                  );
+                  location.reload();
+                })
+                .catch((error) => {
+                  swalWithBootstrapButtons.fire(
+                    "Desolé !",
+                    "Une erreur s'est produite",
+                    "Verifiez votre connexion et réessayez ."
+                  );
+                });
+            } else {
+              swalWithBootstrapButtons.fire(
+                "Annulé !",
+                "Vos données sont toujours disponible"
+              );
+            }
+          });
+      }
+      if (site == "car") {
+        identifier;
+        const swalWithBootstrapButtons = this.$swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+          .fire({
+            title: "Êtes vous sûres ?",
+            text: "Cet action sera irreversible!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "OUI, Supprimer!",
+            cancelButtonText: "Non, Annuler!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Car.deleteCar(identifier)
+                .then((response) => {
+                  swalWithBootstrapButtons.fire(
+                    "Supprimé!",
+                    "Cette voiture a été suprimé.",
+                    "success"
+                  );
+                  location.reload();
+                })
+                .catch((error) => {
+                  swalWithBootstrapButtons.fire(
+                    "Desolé !",
+                    "Une erreur s'est produite",
+                    "Verifiez votre connexion et réessayez ."
+                  );
+                });
+            } else {
+              swalWithBootstrapButtons.fire(
+                "Annulé !",
+                "Vos données sont toujours disponible"
+              );
+            }
+          });
+      }
     },
     editService(service, site) {
       sessionStorage.setItem("tourToEdit", service);

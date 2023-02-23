@@ -118,7 +118,7 @@ export default {
       this.$swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Site moifié avec succès",
+        title: "Site modifié avec succès",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -135,7 +135,7 @@ export default {
         this.visitHour = tourDetails.visit_hour;
         this.longitude = tourDetails.longitude;
         this.latitude = tourDetails.latitude;
-        //    this.picture = tourDetails.picture;
+        //this.picture = tourDetails.picture;
         this.description = tourDetails.description;
         this.address = tourDetails.address;
         this.languages = tourDetails.languages.split(",");

@@ -31,7 +31,7 @@ const tableColumnsHotel = [
   "Image",
   "Note",
 ];
-const tableColumnsCar = ["Id", "Nom", "Prix", "Marque", "image"];
+const tableColumnsCar = ["Id", "Nom", "Prix", "Marque"];
 export default {
   components: {
     PaperTable,
@@ -117,6 +117,7 @@ export default {
               note: hotels[index].note,
               identifier: hotels[index].id,
               site: "hotel",
+              idBD: hotels[index].id,
             });
             counter++;
           }
@@ -145,6 +146,7 @@ export default {
               note: resto[index].note,
               identifier: resto[index].id,
               site: "resto",
+              idBD: resto[index].id,
             });
             counter++;
           }
@@ -159,7 +161,7 @@ export default {
       );
       Service.carService(sessionStorage.getItem("partnerId")).then(
         (response) => {
-          "Id", "Nom", "Prix", "Marque", "image";
+          "Id", "Nom", "Prix", "Marque", "image1", "image2", "image3";
 
           var car = response.data["data"];
           var counter = 1;
@@ -169,9 +171,12 @@ export default {
               nom: car[index].name,
               prix: car[index].price,
               marque: car[index].brand,
-              image: car[index].picture1,
+              image1: car[index].picture1,
+              image2: car[index].picture2,
+              image3: car[index].picture3,
               identifier: car[index].id,
               site: "car",
+              idBD: car[index].id,
             });
             counter++;
           }

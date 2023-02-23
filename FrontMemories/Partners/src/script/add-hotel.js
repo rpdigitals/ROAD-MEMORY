@@ -26,7 +26,8 @@ export default {
       satEn: "",
       sunEn: "",
       hotelCreatedSuccessfully: 2,
-      //hotelId after creating the hotel      hotelId: 0,
+      //hotelId after creating the hotel
+      hotelId: 0,
       //caracteristics
       carForm: 0,
       wifi: "",
@@ -70,6 +71,7 @@ export default {
         partner_id: sessionStorage.getItem("partnerId"),
       })
         .then((response) => {
+          console.log(response.data);
           this.hotelCreatedSuccessfully = 1;
           this.hotelId = response.data.hotel_id;
           this.addHotelCaracteristic();
