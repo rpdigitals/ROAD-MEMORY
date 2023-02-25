@@ -16,7 +16,7 @@ export default {
   methods: {
     booking() {
       Booking.booking(sessionStorage.getItem("partnerId")).then((response) => {
-        //console.log(response.data);
+        console.log(response.data);
         this.hotelBookings = response.data.hotelBookings;
         this.tourBookings = response.data.tourBookings;
         this.restoBookings = response.data.restoBookings;
@@ -27,7 +27,7 @@ export default {
         this.hotelServices = response.data.hotels;
         this.tourServices = response.data.tours;
         this.restoServices = response.data.restos;
-        console.log(this.tourServices);
+        //console.log(this.tourServices);
         // console.log(tourServices);
       });
     },

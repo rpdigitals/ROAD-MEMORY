@@ -12,6 +12,8 @@ export default {
       categories: [],
       keyword: "",
       responseLength: 1,
+      tourTypeChoosen: "",
+      filterTour: 0,
     };
   },
   methods: {
@@ -22,9 +24,9 @@ export default {
     },
 
     getDatas() {
+      this.filterTour = 0;
       Tour.allTour()
         .then((response) => {
-          console.log(JSON.parse(response.data["data"][0].open_days_hours));
           this.tours = response.data["data"];
           this.responseLength = this.tours.length;
         })
@@ -52,9 +54,12 @@ export default {
           console.log(e);
         });
     },
-    tourOfCategory(id) {
+    tourOfCategory(id, type) {
+      this.tourTypeChoosen = type;
+      this.filterTour = 1;
       TourCategory.tourOfCategory(id)
         .then((response) => {
+          console.log(response.data["data"]);
           this.tours = response.data["data"];
           this.responseLength = this.tours.length;
         })

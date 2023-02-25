@@ -13,6 +13,8 @@ export default {
         Profil: 4,
       },
       //Booking Data
+      headTitle: "Reservations",
+      headingMobile: 1,
 
       wishlist: "",
       bookings: "",
@@ -37,15 +39,19 @@ export default {
       switch (head) {
         case this.heading.Reservations:
           one = 0;
+          this.headTitle = "Reservations";
           break;
         case this.heading.Favoris:
           two = 0;
+          this.headTitle = "Favoris";
           break;
         case this.heading.Parametres:
           tree = 0;
+          this.headTitle = "Parametres";
           break;
         case this.heading.Profil:
           four = 0;
+          this.headTitle = "Profil";
           break;
       }
       this.heading = {

@@ -20,7 +20,10 @@ import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
+import VueModal from "@kouts/vue-modal";
+import "@kouts/vue-modal/dist/vue-modal.css";
 
+Vue.component("Modal", VueModal);
 Vue.use(PaperDashboard);
 Vue.use(VueSweetalert2);
 /* eslint-disable no-new */

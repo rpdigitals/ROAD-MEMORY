@@ -6,21 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
-    * Run the migrations.
-    *
-    * @return void
-    */
-
-    public function up() {
-        Schema::create( 'payments', function ( Blueprint $table ) {
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string( 'for' );
-            $table->string( 'payment_number' );
-            $table->integer( 'custumer_id' );
-            $table->integer( 'partner_id' );
-            $table->integer( 'foreignId' );   
-            $table->string( 'status' )->default('pending');   
+            $table->string('for');
+            $table->string('payment_number');
+            $table->foreignId('custumer_id')->constrained()->ondelete('cascade');
+            $table->foreignId('partner_id')->constrained()->ondelete('cascade');
+            $table->foreignId('foreignId')->constrained()->ondelete('cascade');
+            $table->string('status')->default('pending');
         });
     }
 

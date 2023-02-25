@@ -60,7 +60,7 @@
               <p>
                 {{ resto.description }}
               </p>
-              <h4>Menu and dishes</h4>
+              <h4>Caractéristiques et facilités</h4>
 
               <div class="row">
                 <div class="col-md-6">

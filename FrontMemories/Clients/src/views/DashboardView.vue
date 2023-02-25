@@ -11,15 +11,16 @@
         </ul>
       </div>
     </div>
-    
+
     <div class="margin_60 container">
+      <span>{{ headtitle }}</span>
       <div id="tabs" class="tabs">
         <nav>
           <ul>
             <select
               name=""
               id=""
-              class="btn btn-primary d-md-none form-control"
+              class="btn btn-warning d-md-none form-control"
               v-model="headingMobile"
               @change="show(key)"
             >
@@ -27,16 +28,26 @@
                 v-for="(key, index) in heading"
                 :key="key"
                 value="{{key}}"
+               
               >
                 {{ index }}
               </option>
             </select>
+
             <li
               v-for="(key, index) in heading"
               :key="key"
               class="d-none d-md-inline"
             >
-              <a @click="show(key)" href="#" class="icon-booking"
+              <a
+                @click="show(key)"
+                v-if="index == headTitle"
+                href="#"
+                class="icon-booking activeHeading"
+                ><span> {{ index }} </span></a
+              >
+
+              <a @click="show(key)" v-else href="#" class="icon-booking"
                 ><span> {{ index }}</span></a
               >
             </li>
@@ -172,7 +183,7 @@
           </section>
           <!-- End section 1 -->
 
-          <section id="section-2" v-if="heading.Favoris == 0">
+          <section id="section-2" v-if="heading.Favoris == 0" class="">
             <div class="row">
               <div
                 class="col-lg-4 col-md-6"
@@ -212,7 +223,7 @@
           </section>
           <!-- End section 2 -->
 
-          <section id="section-3" v-if="heading.Parametres == 0">
+          <section id="section-3" v-if="heading.Parametres == 0" class="">
             <div class="row">
               <div class="col-md-6">
                 <form @submit.prevent="updatePassword">
@@ -328,7 +339,7 @@
           </section>
           <!-- End section 3 -->
 
-          <section id="section-4" v-if="heading.Profil == 0">
+          <section id="section-4" v-if="heading.Profil == 0" class="">
             <div class="row">
               <div class="col-md-6">
                 <h4>Your profile</h4>
@@ -523,3 +534,10 @@
     <!-- end container -->
   </main>
 </template>
+<style scoped>
+.activeHeading {
+  background-color: #008489;
+  transition: transform 0.2s;
+  transform: scale(1, 2);
+}
+</style>

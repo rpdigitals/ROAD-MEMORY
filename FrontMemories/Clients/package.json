@@ -12,8 +12,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@kouts/vue-modal": "^2.1.11",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
+    "vue-bs-modal": "^0.7.9",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

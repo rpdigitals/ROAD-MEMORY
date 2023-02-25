@@ -63,6 +63,7 @@ return array(
     'App\\Models\\Hotel\\HotelWishList' => $baseDir . '/app/Models/Hotel/HotelWishList.php',
     'App\\Models\\Hotel\\Room' => $baseDir . '/app/Models/Hotel/Room.php',
     'App\\Models\\Hotel\\RoomCategory' => $baseDir . '/app/Models/Hotel/RoomCategory.php',
+    'App\\Models\\News' => $baseDir . '/app/Models/News.php',
     'App\\Models\\Notification' => $baseDir . '/app/Models/Notification.php',
     'App\\Models\\Partner' => $baseDir . '/app/Models/Partner.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',

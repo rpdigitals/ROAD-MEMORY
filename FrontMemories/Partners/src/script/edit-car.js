@@ -40,7 +40,7 @@ export default {
       this.$swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Voiture ajouté avec succès",
+        title: "Voiture modifiée avec succès",
         showConfirmButton: false,
         timer: 1500,
       });

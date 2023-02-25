@@ -592,6 +592,7 @@ class ComposerStaticInitec6ccc895cb387518e0a0d1c1b89a239
         'App\\Models\\Hotel\\HotelWishList' => __DIR__ . '/../..' . '/app/Models/Hotel/HotelWishList.php',
         'App\\Models\\Hotel\\Room' => __DIR__ . '/../..' . '/app/Models/Hotel/Room.php',
         'App\\Models\\Hotel\\RoomCategory' => __DIR__ . '/../..' . '/app/Models/Hotel/RoomCategory.php',
+        'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Notification' => __DIR__ . '/../..' . '/app/Models/Notification.php',
         'App\\Models\\Partner' => __DIR__ . '/../..' . '/app/Models/Partner.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',

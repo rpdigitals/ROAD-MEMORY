@@ -74,40 +74,6 @@ class HotelController extends Controller
         return HotelCaracteristic::where('hotel_id', $id)->first();
     }
 
-    public function createHotelNews(Request $request)
-    {
-        HotelNews::create($request->all());
-        return response()->json([
-            'success' => true,
-            'message' => 'HotelNews created successfully'
-        ]);
-    }
-
-    public function updateHotelNews(Request $request, $id)
-    {
-        HotelNews::where('id', $id)->update($request->all());
-        return response()->json([
-            'success' => true,
-            'message' => 'HotelNews updated successfully'
-        ]);
-    }
-
-    public function deleteHotelNews($id)
-    {
-        HotelNews::where('id', $id)->update([
-            'status' => 0
-        ]);
-        return response()->json([
-            'success' => true,
-            'message' => 'HotelNews deleted successfully'
-        ]);
-    }
-
-    public function allHotelNews()
-    {
-        return HotelNews::where('status', 1)->orderBy('created_at', 'DESC')->get();
-    }
-
     public function createRoomCategory(Request $request)
     {
         RoomCategory::create($request->all());

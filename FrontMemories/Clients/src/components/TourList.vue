@@ -25,15 +25,43 @@
               >
             </li> -->
 
-            <li>
-              <a @click="tourOfCategory(category.id)"
+            <li v-if="filterTour == 1">
+              <a
+                v-if="category.type == tourTypeChoosen"
+                id="active"
+                style="cursor: pointer; background-color: rgb(0, 120, 123)"
+                @click="tourOfCategory(category.id, category.type)"
+                >{{ category.type }} <span></span
+              ></a>
+              <a
+                v-else
+                id="active"
+                style="cursor: pointer"
+                @click="tourOfCategory(category.id, category.type)"
+                >{{ category.type }} <span></span
+              ></a>
+            </li>
+            <li v-else>
+              <a
+                id="active"
+                style="cursor: pointer"
+                @click="tourOfCategory(category.id, category.type)"
                 >{{ category.type }} <span></span
               ></a>
             </li>
           </ul>
           <ul id="cat_nav">
             <li>
-              <a id="active" @click="getDatas">Tout <span></span></a>
+              <a
+                v-if="filterTour == 0"
+                id="active"
+                style="cursor: pointer; background-color: rgb(0, 120, 123)"
+                @click="getDatas"
+                >Tout <span></span
+              ></a>
+              <a v-else id="active" style="cursor: pointer" @click="getDatas"
+                >Tout <span></span
+              ></a>
             </li>
           </ul>
         </div>

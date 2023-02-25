@@ -12,10 +12,6 @@ Route::post( '/create-hotel-caracteristic', [ HotelController::class, 'createHot
 Route::post( '/update-hotel-caracteristic/{id}', [ HotelController::class, 'updateHotelCaracteristic' ] );
 Route::get( '/hotel-caracteristic/{id}', [ HotelController::class, 'hotelCaracteristic' ] );
 
-Route::post( '/create-hotel-news', [ HotelController::class, 'createHotelNews' ] );
-Route::post( '/update-hotel-news/{id}', [ HotelController::class, 'updateHotelNews' ] );
-Route::get( '/delete-hotel-news/{id}', [ HotelController::class, 'deleteHotelNews' ] );
-Route::get( '/all-hotel-news', [ HotelController::class, 'allHotelNews' ] );
 
 Route::post( '/create-room-category', [ HotelController::class, 'createRoomCategory' ] );
 Route::post( '/update-room-category/{id}', [ HotelController::class, 'updateRoomCategory' ] );

@@ -11,10 +11,6 @@ Route::get( '/all-tour', [ TourController::class, 'allTour' ] );
 Route::post( '/create-tour-caracteristic', [ TourController::class, 'createTourCaracteristic' ] );
 Route::post( '/update-tour-caracteristic/{id}', [ TourController::class, 'updateTourCaracteristic' ] );
 
-Route::post( '/create-tour-news', [ TourController::class, 'createTourNews' ] );
-Route::post( '/update-tour-news/{id}', [ TourController::class, 'updateTourNews' ] );
-Route::get( '/delete-tour-news/{id}', [ TourController::class, 'deleteTourNews' ] );
-Route::get( '/all-tour-news', [ TourController::class, 'allTourNews' ] );
 
 Route::post( '/create-trek', [ TourController::class, 'createTrek' ] );
 Route::post( '/update-trek/{id}', [ TourController::class, 'updateTrek' ] );

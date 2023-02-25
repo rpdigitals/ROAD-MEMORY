@@ -1,119 +1,124 @@
 <template>
-  <card class="card" title="Edit Profile">
+  <card class="card" title="Modifiez votre profil">
     <div>
-      <form @submit.prevent>
-        <div class="row">
-          <div class="col-md-5">
-            <fg-input
-              type="text"
-              label="Company"
-              :disabled="true"
-              placeholder="Paper dashboard"
-              v-model="user.company"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-3">
-            <fg-input
-              type="text"
-              label="Username"
-              placeholder="Username"
-              v-model="user.username"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="email"
-              label="Username"
-              placeholder="Email"
-              v-model="user.email"
-            >
-            </fg-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <fg-input
-              type="text"
-              label="First Name"
-              placeholder="First Name"
-              v-model="user.firstName"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-6">
-            <fg-input
-              type="text"
-              label="Last Name"
-              placeholder="Last Name"
-              v-model="user.lastName"
-            >
-            </fg-input>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <fg-input
-              type="text"
-              label="Address"
-              placeholder="Home Address"
-              v-model="user.address"
-            >
-            </fg-input>
-          </div>
-        </div>
-
+      <!-- <form @submit.prevent="updateProfile()">
         <div class="row">
           <div class="col-md-4">
             <fg-input
               type="text"
-              label="City"
-              placeholder="City"
-              v-model="user.city"
+              label="Nom de la societé"
+              placeholder="KofCorporation"
+              v-model="name"
             >
             </fg-input>
           </div>
           <div class="col-md-4">
             <fg-input
               type="text"
-              label="Country"
-              placeholder="Country"
-              v-model="user.country"
+              label="Nom du Directeur"
+              placeholder="Omar Farouk KOUGBADA"
+              v-model="ceoName"
             >
             </fg-input>
           </div>
           <div class="col-md-4">
             <fg-input
-              type="number"
-              label="Postal Code"
-              placeholder="ZIP Code"
-              v-model="user.postalCode"
+              type="text"
+              label="Nom du Directeur Adjoint"
+              placeholder="Cendras KOUGBADA"
+              v-model="assistantName"
+            >
+            </fg-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <fg-input
+              type="tel"
+              label="Telephone avec indicatif"
+              placeholder="+22890989876"
+              v-model="firstTelephone"
+            >
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input
+              type="tel"
+              label="Second Telephone "
+              placeholder="+22890989876"
+              v-model="secondTelephone"
+            >
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input
+              type="file"
+              label="Fichier de verification"
+              placeholder="Cendras KOUGBADA"
+              v-model="verificationFile"
             >
             </fg-input>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>About Me</label>
-              <textarea
-                rows="5"
-                class="form-control border-input"
-                placeholder="Here can be your description"
-                v-model="user.aboutMe"
-              >
-              </textarea>
-            </div>
-          </div>
-        </div>
         <div class="text-center">
-          <p-button type="info" round @click.native.prevent="updateProfile">
-            Update Profile
-          </p-button>
+          <button type="submit" class="btn btn-info" round>
+            Mettre à jour
+          </button>
+        </div>
+        <div class="clearfix"></div>
+      </form> -->
+      <form @submit.prevent="updateProfile()">
+        <div class="row">
+          <div class="col-md-4">
+            <fg-input type="text" label="Nom de la societé" v-model="name">
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input type="text" label="Nom du Directeur" v-model="ceoName">
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input
+              type="text"
+              label="Nom du Directeur Adjoint"
+              v-model="assistantName"
+            >
+            </fg-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <fg-input
+              type="tel"
+              label="Telephone avec indicatif"
+              v-model="firstTelephone"
+            >
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input
+              type="tel"
+              label="Second Telephone "
+              v-model="secondTelephone"
+            >
+            </fg-input>
+          </div>
+          <div class="col-md-4">
+            <fg-input
+              type="file"
+              label="Fichier de verification"
+              placeholder="Cendras KOUGBADA"
+              v-model="verificationFile"
+            >
+            </fg-input>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-info" round>
+            Mettre à jour
+          </button>
         </div>
         <div class="clearfix"></div>
       </form>
@@ -121,26 +126,56 @@
   </card>
 </template>
 <script>
+import Profil from "../../services/profil-request.js";
+
 export default {
   data() {
     return {
-      user: {
-        company: "Paper Dashboard",
-        username: "michael23",
-        email: "",
-        firstName: "Chet",
-        lastName: "Faker",
-        address: "Melbourne, Australia",
-        city: "Melbourne",
-        postalCode: "",
-        aboutMe: `We must accept finite disappointment, but hold on to infinite hope.`,
-      },
+      name: "",
+      ceoName: "",
+      assistantName: "",
+      firstTelephone: "",
+      secondTelephone: "",
+      verificationFile: "",
     };
   },
   methods: {
     updateProfile() {
-      alert("Your data: " + JSON.stringify(this.user));
+      Profil.updatePartner(
+        {
+          society_name: this.name,
+          ceo_name: this.ceoName,
+          assistant_name: this.assistantName,
+          first_telephone: this.firstTelephone,
+          second_telephone: this.secondTelephone,
+          verification_file: this.verificationFile,
+        },
+        sessionStorage.getItem("partnerId")
+      ).then(() => {
+        //# alert success
+        this.$swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Profil modifié avec succès",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
     },
+    getPartner(id) {
+      Profil.getPartner(id).then((response) => {
+        let partner = response.data.data;
+        this.name = partner.society_name;
+        this.ceoName = partner.ceo_name;
+        this.assistantName = partner.assistant_name;
+        this.firstTelephone = partner.first_telephone;
+        this.secondTelephone = partner.second_telephone;
+        this.verificationFile = partner.verification_file;
+      });
+    },
+  },
+  mounted() {
+    this.getPartner(sessionStorage.getItem("partnerId"));
   },
 };
 </script>

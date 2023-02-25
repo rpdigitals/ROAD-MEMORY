@@ -43,7 +43,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Paper Dashboard",
+      default: "Tableau de bord",
     },
     backgroundColor: {
       type: String,
@@ -133,5 +133,4 @@ export default {
 };
 //How sort a list in Javascript
 </script>
-<style> 
-</style>
+<style></style>
