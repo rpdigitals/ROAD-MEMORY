@@ -3,5 +3,7 @@ import MainIndex from "../components/MainIndex.vue";
 </script>
 
 <template>
-  <MainIndex />
+  <div>
+    <MainIndex />
+  </div>
 </template>

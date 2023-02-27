@@ -33,6 +33,16 @@
                   />
                 </div>
                 <div class="form-group">
+                  <label>Telephone (avec indicatif)</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="+22897977007"
+                    v-model="telephone"
+                    required
+                  />
+                </div>
+                <div class="form-group">
                   <label>Adresse mail</label>
                   <input
                     type="email"
@@ -52,6 +62,12 @@
                     required
                     v-model="password"
                   />
+                </div>
+                <div class="text-danger text-center" v-if="registerStatus == 0">
+                  cet email est déja utilisé
+                </div>
+                <div class="text-danger text-center" v-if="registerStatus == 3">
+                  Veuillez entrer un numéro de téléphone correct
                 </div>
 
                 <button type="submit" class="btn_full">S'inscrire</button>

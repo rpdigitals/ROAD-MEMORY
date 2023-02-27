@@ -12,7 +12,7 @@ export default {
   methods: {
     logout() {
       this.isLogged = false;
-      sessionStorage.setItem("isLogged", false);
+      sessionStorage.setItem("isLogged", 0);
       this.$session.destroy();
       this.$router.push("/");
     },
@@ -21,9 +21,7 @@ export default {
     },
   },
   mounted() {},
-  //how to destroy all session in vue js
 };
-// generer un nombre aleatoire entre 1000 et 9999 en language art
 </script>
 
 <template>
@@ -36,16 +34,14 @@ export default {
           </div>
           <div class="col-6">
             <ul id="top_links">
-              <li v-if="!isLogged">
-                <RouterLink to="/login">Se connecter</RouterLink>
-              </li>
-              <li v-else>
-                <a href="#" @click="logout">Se déconnecter</a>
+              <li>
+                <a v-if="isLogged == 1" href="#" @click="logout"
+                  >Se déconnecter</a
+                >
+                <RouterLink to="/login" v-else>Se connecter</RouterLink>
               </li>
 
-              <li>
-                <RouterLink to="/dashboard">Tableau de bord</RouterLink>
-              </li>
+              <RouterLink to="/dashboard">Tableau de bord </RouterLink>
 
               <li id="top_tools">
                 <div class="dropdown dropdown-cart">

@@ -7,14 +7,14 @@
         <div class="row justify-content-center">
           <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
             <div id="login">
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <img
                   src="img/logo_sticky.png"
                   alt="Image"
                   width="160"
                   height="34"
                 />
-              </div>
+              </div> -->
               <hr />
               <form @submit.prevent="login">
                 <a href="#0" class="social_bt facebook"
@@ -24,17 +24,18 @@
                   >Se connecter avec Google</a
                 >
                 <div class="divider"><span>Ou</span></div>
-
                 <div class="form-group">
-                  <label>Adresse mail</label>
+                  <label>Email</label>
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="ex : johndoe@example.com"
+                    placeholder="ex : johndoe@gmail.com"
                     v-model="email"
+                    maxlength="25"
                     required
                   />
                 </div>
+
                 <div class="form-group">
                   <label>Mot de passe</label>
                   <input

@@ -25,8 +25,6 @@ export default {
     hotelDetails(id) {
       Hotel.hotelDetails(id)
         .then((response) => {
-          console.log(response.data["data"][0]);
-
           this.hotel = response.data["data"][0];
           this.hotelId = response.data["data"][0].id;
           this.price = response.data["data"][0].price;
@@ -34,10 +32,11 @@ export default {
           this.room_categories = response.data["data"][0].room_categories;
           this.note = response.data["data"][0].note;
           this.reviews = response.data["data"][0].reviews;
-          this.checkHotelWishedByCustomer(
-            this.hotel.id,
-            parseInt(sessionStorage.getItem("customerId"))
-          );
+          // this.checkHotelWishedByCustomer(
+          //   this.hotel.id,
+          //   parseInt(sessionStorage.getItem("customerId"))
+          // );
+          console.log(this.caracteristics);
         })
         .catch((e) => {
           console.log(e);
@@ -61,17 +60,17 @@ export default {
         );
       }
     },
-    checkHotelWishedByCustomer(hotelId, customerId) {
-      HotelWishList.checkhotelWishedByCustomer(hotelId, customerId)
-        .then((response) => {
-          this.hasWished = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    // checkHotelWishedByCustomer(hotelId, customerId) {
+    //   Hotel.checkhotelWishedByCustomer(hotelId, customerId)
+    //     .then((response) => {
+    //       this.hasWished = response.data;
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //     });
+    // },
     createHotelWishList(hotelId) {
-      HotelWishList.createHotelWishList(hotelId)
+      Hotel.createHotelWishList(hotelId)
         .then((response) => {
           this.hasWished = response.data;
         })

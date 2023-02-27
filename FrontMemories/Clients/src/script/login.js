@@ -16,11 +16,12 @@ export default {
         password: this.password,
       })
         .then((response) => {
+          console.log(response);
           if (response.status === 200) {
-            sessionStorage.setItem("isLogged", true);
+            sessionStorage.setItem("isLogged", 1);
             sessionStorage.setItem("customerId", response.data);
             this.loggingFailed == false;
-            this.$router.push("/");
+            this.$router.go(-1);
           } else {
             this.loggingFailed = true;
           }

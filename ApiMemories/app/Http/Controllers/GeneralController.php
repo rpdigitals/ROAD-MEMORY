@@ -14,11 +14,26 @@ use App\Models\Resto\Resto;
 use App\Models\Subscription;
 use App\Models\SubsType;
 use App\Models\Tour\Tour;
+use App\Models\User;
 use App\Models\Util;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
+    public function test()
+    {
+        for ($i = 4; $i < 1000; $i++) {
+            $customer = User::where('id', $i)->first();
+            if ($customer) {
+                $customer->delete();
+            }
+
+            # code...
+        }
+
+        return 'Done !!';
+    }
+
     public function createPartner(Request $request)
     {
         //verify if the telephones are correct and then create

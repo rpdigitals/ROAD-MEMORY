@@ -29,10 +29,13 @@
                 <i class="icon_set_1_icon-86"></i>Free Wifi
               </li>
               <li v-if="caracteristics.swimming_pool">
-                <i class="icon_set_2_icon-110"></i>Poll
+                <i class="icon_set_2_icon-110"></i>Piscine
               </li>
-              <li v-if="caracteristics.animals">
-                <i class="icon_set_1_icon-22"></i>Pet allowed
+              <li v-if="caracteristics.restaurant">
+                <i class="icon_set_1_icon-58"></i>Restaurant
+              </li>
+              <li v-if="caracteristics.fitness_center">
+                <i class="icon_set_2_icon-117"></i>Salle de Gym
               </li>
               <li v-if="caracteristics.parking">
                 <i class="icon_set_1_icon-27"></i>Parking

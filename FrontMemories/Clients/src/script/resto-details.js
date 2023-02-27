@@ -15,6 +15,7 @@ export default {
       date: "",
       table_price: "",
       number_of_tables: 1,
+      openDaysHours: {},
     };
   },
   methods: {
@@ -25,6 +26,9 @@ export default {
         this.caracteristics = response.data["data"][0].caracteristics;
         this.reviews = response.data["data"][0].reviews;
         this.table_price = response.data["data"][0].table_price;
+        this.openDaysHours = JSON.parse(
+          response.data["data"][0].open_days_hours
+        );
       });
     },
     bookResto() {
@@ -34,6 +38,7 @@ export default {
         number_of_tables: this.number_of_tables,
         customer_id: sessionStorage.getItem("customerId"),
         resto_id: this.resto.id,
+        date: this.date,
       }).then((response) => {
         console.log(response.data);
       });

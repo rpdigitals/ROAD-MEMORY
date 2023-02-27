@@ -10,7 +10,7 @@ export default {
         Reservations: 0,
         Favoris: 2,
         Parametres: 3,
-        Profil: 4,
+        // Profil: 4,
       },
       //Booking Data
       headTitle: "Reservations",
@@ -31,10 +31,11 @@ export default {
   },
   methods: {
     show(head) {
+      console.log(head);
       var one = 1;
       var two = 2;
       var tree = 3;
-      var four = 4;
+      // var four = 4;
 
       switch (head) {
         case this.heading.Reservations:
@@ -49,16 +50,16 @@ export default {
           tree = 0;
           this.headTitle = "Parametres";
           break;
-        case this.heading.Profil:
-          four = 0;
-          this.headTitle = "Profil";
-          break;
+        // case this.heading.Profil:
+        //   four = 0;
+        //   this.headTitle = "Profil";
+        //   break;
       }
       this.heading = {
         Reservations: one,
         Favoris: two,
         Parametres: tree,
-        Profil: four,
+        //  Profil: four,
       };
     },
     getWishList() {
@@ -77,7 +78,7 @@ export default {
           this.tourBookings = reponse.data.tour_bookings;
           this.hotelBookings = reponse.data.hotel_bookings;
           this.restoBookings = reponse.data.resto_bookings;
-          //  console.log(reponse.data.resto_bookings);
+          console.log(reponse.data.resto_bookings);
         }
       );
     },

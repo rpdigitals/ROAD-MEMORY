@@ -53,6 +53,7 @@ Route::post('/update-news/{id}', [GeneralController::class, 'updateNews']);
 Route::get('/delete-news/{id}', [GeneralController::class, 'deleteNews']);
 Route::get('/all-news', [GeneralController::class, 'allNews']);
 Route::get('/all-news-of-partner/{id}', [GeneralController::class, 'allNewsOfPartner']);
+Route::get('/test', [GeneralController::class, 'test']);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/car.php';

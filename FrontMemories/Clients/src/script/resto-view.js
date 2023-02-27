@@ -33,6 +33,7 @@ export default {
     restoOfCategory(id) {
       Resto.restoOfCategory(id).then((response) => {
         this.restoList = response.data["data"];
+        this.responseLength = this.restoList.length;
       });
     },
     goToRestoDetails(restoId) {

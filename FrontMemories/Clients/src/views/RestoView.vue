@@ -41,16 +41,19 @@
               :key="restoCategory.id"
             >
               <li>
-                <a @click="restoOfCategory(restoCategory.id)" id="active"
-                  ><i></i> {{ restoCategory.name }}<span>()</span></a
-                >
+                <a
+                  href="#"
+                  @click="restoOfCategory(restoCategory.id)"
+                  id="active"
+                  ><i></i> {{ restoCategory.name }}<span></span
+                ></a>
               </li>
             </ul>
             <ul id="cat_nav">
               <li>
-                <a @click="getRestoList" id="active"
-                  ><i></i> Tout<span>()</span></a
-                >
+                <a href="#" @click="getRestoList" id="active"
+                  ><i></i> Tout<span></span
+                ></a>
               </li>
             </ul>
           </div>

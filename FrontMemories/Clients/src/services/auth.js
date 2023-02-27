@@ -1,11 +1,11 @@
 import http from "../http-common";
 
 class Auth {
-  register(datas) {
-    return http.post("/register", datas);
+  async register(datas) {
+    return await http.post("/register", datas);
   }
-  login(datas) {
-    return http.post("/login", datas);
+  async login(datas) {
+    return await http.post("/login", datas);
   }
 }
 

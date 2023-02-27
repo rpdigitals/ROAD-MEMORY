@@ -13,6 +13,7 @@ export default {
       tourId: "",
       category: {},
       caracteristic: {},
+      openDaysHours: {},
       date: "",
       time: "",
       numberOfPerson: 1,
@@ -26,9 +27,9 @@ export default {
     tourDetails(id) {
       Tour.tourDetails(id)
         .then((response) => {
-          console.log(response.data["data"][0]);
           this.tour = response.data["data"][0];
-          console.log(this.tour);
+          this.openDaysHours = JSON.parse(this.tour.open_days_hours);
+          console.log(this.openDaysHours);
           this.tourId = response.data["data"][0].id;
           this.price = response.data["data"][0].price;
           this.category = response.data["data"][0].category;
@@ -37,7 +38,6 @@ export default {
             this.tour.id,
             parseInt(sessionStorage.getItem("customerId"))
           );
-          console.log(this.price);
         })
         .catch((e) => {
           console.log(e);

@@ -69,7 +69,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="tour_container">
             <div class="ribbon_3 popular"><span>Popular</span></div>
             <div class="img_container">
-              <router-link to="/tour-detail">
+              <router-link to="/tour-list">
                 <img
                   src="img/tour_box_1.jpg"
                   width="800"
@@ -112,7 +112,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="tour_container">
             <div class="ribbon_3 popular"><span>Popular</span></div>
             <div class="img_container">
-              <router-link to="/tour-detail">
+              <router-link to="/tour-list">
                 <img
                   src="img/tour_box_2.jpg"
                   width="800"
@@ -154,7 +154,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="tour_container">
             <div class="ribbon_3 popular"><span>Popular</span></div>
             <div class="img_container">
-              <router-link to="/tour-detail">
+              <router-link to="/tour-list">
                 <img
                   src="img/tour_box_3.jpg"
                   width="800"
@@ -198,7 +198,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="tour_container">
             <div class="ribbon_3"><span>Top rated</span></div>
             <div class="img_container">
-              <router-link to="/tour-detail">
+              <router-link to="/tour-list">
                 <img
                   src="img/tour_box_4.jpg"
                   width="800"
@@ -242,7 +242,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="tour_container">
             <div class="ribbon_3"><span>Top rated</span></div>
             <div class="img_container">
-              <router-link to="/tour-detail">
+              <router-link to="/tour-list">
                 <img
                   src="img/tour_box_14.jpg"
                   width="800"
@@ -303,7 +303,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="hotel_container">
             <div class="ribbon_3 popular"><span>Popular</span></div>
             <div class="img_container">
-              <router-link to="/hotel-detail">
+              <router-link to="/hotel-list">
                 <img
                   src="img/hotel_1.jpg"
                   width="800"
@@ -342,7 +342,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="hotel_container">
             <div class="ribbon_3 popular"><span>Popular</span></div>
             <div class="img_container">
-              <router-link to="/hotel-detail">
+              <router-link to="/hotel-list">
                 <img
                   src="img/hotel_2.jpg"
                   width="800"
@@ -381,7 +381,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="hotel_container">
             <div class="ribbon_3"><span>Top rated</span></div>
             <div class="img_container">
-              <router-link to="/hotel-detail">
+              <router-link to="/hotel-list">
                 <img
                   src="img/hotel_3.jpg"
                   width="800"
@@ -420,7 +420,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="hotel_container">
             <div class="ribbon_3"><span>Top rated</span></div>
             <div class="img_container">
-              <router-link to="/hotel-detail">
+              <router-link to="/hotel-list">
                 <img
                   src="img/hotel_4.jpg"
                   width="800"
@@ -461,7 +461,7 @@ import SearchContainer from "./SearchContainer.vue";
           <div class="hotel_container">
             <div class="ribbon_3"><span>Top rated</span></div>
             <div class="img_container">
-              <router-link to="/hotel-detail">
+              <router-link to="/hotel-list">
                 <img
                   src="img/hotel_5.jpg"
                   width="800"

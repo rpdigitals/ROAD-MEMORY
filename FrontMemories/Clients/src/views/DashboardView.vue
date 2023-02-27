@@ -13,19 +13,38 @@
     </div>
 
     <div class="margin_60 container">
-      <span>{{ headtitle }}</span>
       <div id="tabs" class="tabs">
         <nav>
           <ul>
-            <div class="tab">
-              <button
-                class="tablinks d-md-none"
+            <div class="tab row">
+              <span
+                class="tablinks col-4"
                 v-for="(key, index) in heading"
                 :key="key"
                 @click="show(key)"
               >
-                <i class="bi bi-list"></i>
-              </button>
+                <div v-if="index == 'Reservations'">
+                  <i
+                    v-if="heading.Reservations == 0"
+                    class="bi bi-grid iconHeading"
+                  ></i>
+                  <i v-else class="bi bi-grid"></i>
+                </div>
+                <div v-if="index == 'Favoris'">
+                  <i
+                    v-if="heading.Favoris == 0"
+                    class="bi bi-heart iconHeading"
+                  ></i>
+                  <i v-else class="bi bi-heart"></i>
+                </div>
+                <div v-if="index == 'Parametres'">
+                  <i
+                    v-if="heading.Parametres == 0"
+                    class="bi bi-gear iconHeading"
+                  ></i>
+                  <i v-else class="bi bi-gear"></i>
+                </div>
+              </span>
             </div>
             <!--    <select
               name=""
@@ -233,7 +252,7 @@
           <!-- End section 2 -->
 
           <section id="section-3" v-if="heading.Parametres == 0" class="">
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-6">
                 <form @submit.prevent="updatePassword">
                   <div class="add_bottom_30">
@@ -339,9 +358,9 @@
                   </div>
                 </form>
               </div>
-            </div>
-            <!-- End row -->
+            </div> -->
 
+            Parametres
             <hr />
             <br />
             <!-- End row -->
@@ -554,37 +573,25 @@
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
 }
 
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+.bi {
+  font-size: 25px;
+  /* padding-right: 5px;
+  padding-left: 5px; */
 }
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
+.tabs span {
+  padding: 25px;
+  border-bottom: 2px solid #008489;
 }
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
+.iconHeading {
+  color: #008489;
+  font-weight: bolder;
+  font-size: 30px;
 }
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+@media (min-width: 839px) {
+  .tablinks {
+    display: none;
+  }
 }
 </style>

@@ -101,39 +101,59 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th colspan="2">1st March to 31st October</th>
+                      <th colspan="2"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Monday</td>
-                      <td>10.00 - 17.30</td>
-                    </tr>
-                    <tr>
-                      <td>Tuesday</td>
-                      <td>09.00 - 17.30</td>
-                    </tr>
-                    <tr>
-                      <td>Wednesday</td>
-                      <td>09.00 - 17.30</td>
-                    </tr>
-                    <tr>
-                      <td>Thursday</td>
+                      <td>Lundi</td>
                       <td>
-                        <span class="label label-danger">Closed</span>
+                        {{ openDaysHours.monSt }} -
+                        {{ openDaysHours.monEn }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Mardi</td>
+                      <td>
+                        {{ openDaysHours.tueSt }} -
+                        {{ openDaysHours.tueEn }}
                       </td>
                     </tr>
                     <tr>
-                      <td>Friday</td>
-                      <td>09.00 - 17.30</td>
+                      <td>Mercredi</td>
+                      <td>
+                        {{ openDaysHours.wedSt }} -
+                        {{ openDaysHours.wedEn }}
+                      </td>
                     </tr>
                     <tr>
-                      <td>Saturday</td>
-                      <td>09.00 - 17.30</td>
+                      <td>Jeudi</td>
+                      <td>
+                        {{ openDaysHours.monSt }} -
+                        {{ openDaysHours.monEn }}
+                      </td>
                     </tr>
                     <tr>
-                      <td>Sunday</td>
-                      <td>10.00 - 17.30</td>
+                      <td>Vendredi</td>
+                      <td>
+                        {{ openDaysHours.monSt }} -
+                        {{ openDaysHours.monEn }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Samedi</td>
+                      <td>
+                        {{ openDaysHours.monSt }} -
+                        {{ openDaysHours.monEn }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Dimanche</td>
+                      <td>
+                        {{ openDaysHours.monSt }} -
+                        {{ openDaysHours.monEn }}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
