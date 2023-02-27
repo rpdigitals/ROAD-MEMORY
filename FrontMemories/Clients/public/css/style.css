@@ -6802,6 +6802,7 @@ a.box_news ul li:after {
     background-size: auto 30px;
   }
 }
+ 
 @media (max-width: 991px) {
   ul#top_tools,
   .sticky ul#top_tools {

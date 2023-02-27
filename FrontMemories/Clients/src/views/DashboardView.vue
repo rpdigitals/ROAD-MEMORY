@@ -17,7 +17,17 @@
       <div id="tabs" class="tabs">
         <nav>
           <ul>
-            <select
+            <div class="tab">
+              <button
+                class="tablinks d-md-none"
+                v-for="(key, index) in heading"
+                :key="key"
+                @click="show(key)"
+              >
+                <i class="bi bi-list"></i>
+              </button>
+            </div>
+            <!--    <select
               name=""
               id=""
               class="btn btn-warning d-md-none form-control"
@@ -28,11 +38,10 @@
                 v-for="(key, index) in heading"
                 :key="key"
                 value="{{key}}"
-               
               >
                 {{ index }}
               </option>
-            </select>
+            </select> -->
 
             <li
               v-for="(key, index) in heading"
@@ -43,7 +52,7 @@
                 @click="show(key)"
                 v-if="index == headTitle"
                 href="#"
-                class="icon-booking activeHeading"
+                class="span activeHeading"
                 ><span> {{ index }} </span></a
               >
 
@@ -538,6 +547,44 @@
 .activeHeading {
   background-color: #008489;
   transition: transform 0.2s;
-  transform: scale(1, 2);
+  color: white;
+  font-weight: bolder;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
 }
 </style>

@@ -4,6 +4,8 @@ import Auth from "../services/auth.js";
 export default {
   data() {
     return {
+      mobileNav: false,
+      windowWidth: false,
       isLogged: sessionStorage.getItem("isLogged"),
     };
   },
@@ -13,6 +15,9 @@ export default {
       sessionStorage.setItem("isLogged", false);
       this.$session.destroy();
       this.$router.push("/");
+    },
+    toggleMobileNav() {
+      this.mobileNav = !this.mobileNav;
     },
   },
   mounted() {},
@@ -41,6 +46,14 @@ export default {
               <li>
                 <RouterLink to="/dashboard">Tableau de bord</RouterLink>
               </li>
+
+              <li id="top_tools">
+                <div class="dropdown dropdown-cart">
+                  <a href="#0" data-bs-toggle="dropdown" class="cart_bt"
+                    ><i class="icon_bag_alt"></i><strong>3</strong></a
+                  >
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -60,11 +73,64 @@ export default {
           </div>
         </div>
         <nav class="col-9">
-          <a
-            class="cmn-toggle-switch cmn-toggle-switch__htx open_close"
-            href="javascript:void(0);"
-            ><span>Menu mobile</span></a
-          >
+          <div class="mobile-nav-class">
+            <div class="mobilePart">
+              <a
+                id="icon-nav-mobile"
+                class="cmn-toggle-switch"
+                href="javascript:void(0);"
+                @click="toggleMobileNav"
+                :class="{ 'icon-active': mobileNav }"
+                ><span>Menu mobile</span></a
+              >
+              <!-- <a
+                id="icon-nav-mobile"
+                class="cmn-toggle-switch"
+                href="javascript:void(0);"
+                @click="toggleMobileNav"
+                :class="{ 'icon-active': mobileNav }"
+                ><i class="bi bi-x"></i
+              ></a> -->
+            </div>
+            <transition name="mobile-nav">
+              <div style="margin-top: 15px">
+                <ul v-show="mobileNav" class="dropdown-nav mobile-ul">
+                  <img src="/img/road.png" alt="" />
+
+                  <li class="mobile-li">
+                    <RouterLink to="/" class="link">Accueil</RouterLink>
+                  </li>
+
+                  <li class="mobile-li">
+                    <RouterLink to="/tour-list" class="link"
+                      >Sites Touristiques</RouterLink
+                    >
+                  </li>
+                  <li class="mobile-li">
+                    <RouterLink to="/hotel-list" class="link"
+                      >Hotels</RouterLink
+                    >
+                  </li>
+                  <li class="mobile-li">
+                    <RouterLink to="/car-list" class="link"
+                      >Voitures</RouterLink
+                    >
+                  </li>
+
+                  <li class="mobile-li">
+                    <RouterLink to="/resto-list" class="link"
+                      >Restaurants</RouterLink
+                    >
+                  </li>
+                  <li class="mobile-li">
+                    <RouterLink to="/dashboard" class="link"
+                      >Tableau de bord</RouterLink
+                    >
+                  </li>
+                </ul>
+              </div>
+            </transition>
+          </div>
           <div class="main-menu">
             <div id="header_menu">
               <img
@@ -131,49 +197,63 @@ export default {
               </li>
             </ul>
           </div>
-
-          <ul id="top_tools">
-            <li>
-              <div class="dropdown dropdown-cart">
-                <a href="#0" data-bs-toggle="dropdown" class="cart_bt"
-                  ><i class="icon_bag_alt"></i><strong>3</strong></a
-                >
-                <ul class="dropdown-menu" id="cart_items">
-                  <li>
-                    <div class="image">
-                      <img src="img/thumb_cart_1.jpg" alt="image" />
-                    </div>
-                    <strong><a href="#">Louvre museum</a>1x $36.00 </strong>
-                    <a href="#" class="action"><i class="icon-trash"></i></a>
-                  </li>
-                  <li>
-                    <div class="image">
-                      <img src="img/thumb_cart_2.jpg" alt="image" />
-                    </div>
-                    <strong><a href="#">Versailles tour</a>2x $36.00 </strong>
-                    <a href="#" class="action"><i class="icon-trash"></i></a>
-                  </li>
-                  <li>
-                    <div class="image">
-                      <img src="img/thumb_cart_3.jpg" alt="image" />
-                    </div>
-                    <strong><a href="#">Versailles tour</a>1x $36.00 </strong>
-                    <a href="#" class="action"><i class="icon-trash"></i></a>
-                  </li>
-                  <li>
-                    <div>Total: <span>$120.00</span></div>
-                    <a href="cart.html" class="button_drop">Go to cart</a>
-                    <a href="payment.html" class="button_drop outline"
-                      >Check out</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
         </nav>
       </div>
     </div>
     <!-- container -->
   </header>
 </template>
+<style scoped>
+@media (min-width: 993px) {
+  .mobile-nav-class {
+    display: none;
+  }
+}
+.mobilePart {
+  display: flex;
+  right: 10px;
+  align-items: center;
+  bottom: 20;
+  position: absolute;
+}
+#icon-nav-mobile {
+  cursor: pointer;
+  transition: O, 1s ease all;
+}
+.icon-active {
+  transform: rotate(180deg);
+}
+.dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 245, 245);
+  top: 0;
+  left: 0;
+}
+.mobile-ul {
+  list-style-type: none;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+}
+
+.link {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-bottom: 1px solid #008489;
+}
+
+/* Change the link color on hover */
+.link:hover {
+  background-color: #008489;
+  color: white;
+  font-weight: bolder;
+  transform: scale(1, 1);
+}
+</style>
