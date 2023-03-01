@@ -1,6 +1,7 @@
 import { ref, onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import Auth from "../services/auth.js";
+import { VueCookieNext } from "vue-cookie";
 export default {
   data() {
     return {
@@ -18,10 +19,25 @@ export default {
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
-            sessionStorage.setItem("isLogged", 1);
-            sessionStorage.setItem("customerId", response.data);
-            this.loggingFailed == false;
-            this.$router.go(-1);
+            if (response.data.customer_id) {
+              sessionStorage.setItem("isLogged", 1);
+              sessionStorage.setItem("customerId", response.data.customer_id);
+              console.log(sessionStorage.getItem("customerId"));
+              this.loggingFailed == false;
+              window.location.href = "http://localhost:3000";
+            }
+            if (response.data.partner_id) {
+              document.cookie =
+                "partnerIdRoadMemory=" + response.data.partner_id + ";path=/";
+              window.location.href = "http://localhost:8080";
+            }
+            if (response.data.user_id) {
+              document.cookie =
+                "userIdRoadMemory=" + response.data.user_id + ";path=/";
+              this.registerStatus = 1;
+              window.location.href =
+                "http://localhost:8080/#/partner-inscription";
+            }
           } else {
             this.loggingFailed = true;
           }

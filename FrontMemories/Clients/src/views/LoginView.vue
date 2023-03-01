@@ -41,17 +41,17 @@
                   <input
                     type="password"
                     class="form-control"
-                    min="8"
+                    minlength="8"
                     placeholder="********"
                     required
                     v-model="password"
                   />
                 </div>
-                <p class="small text-dark">
+                <div class="small text-dark text-center">
                   <router-link to="/password-forgotten" href="#"
                     >Mot de passe oublié ?</router-link
                   >
-                </p>
+                </div>
                 <!-- <span class="small">
                   <router-link to="/password-forgotten" href="#"
                     >Mot de passe oublié ?</router-link
@@ -65,6 +65,19 @@
                   >S'inscrire</router-link
                 >
               </form>
+              <br />
+              <div class="text-center">
+                <router-link
+                  to="/register-partner"
+                  href="#"
+                  style="
+                    color: #008489;
+                    text-decoration: underline;
+                    font-weight: bolder;
+                  "
+                  >Devenir notre partenaire</router-link
+                >
+              </div>
             </div>
           </div>
         </div>

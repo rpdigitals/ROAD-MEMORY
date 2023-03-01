@@ -6,5 +6,8 @@ class Profil {
   getPartner(id) {
     return http.get(`/partner/${id}`);
   }
+  addPartner(data) {
+    return http.post("/create-partner", data);
+  }
 }
 export default new Profil();

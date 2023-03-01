@@ -1,7 +1,7 @@
 <template>
   <card class="card" title="Modifiez votre profil">
     <div>
-      <!-- <form @submit.prevent="updateProfile()">
+      <form @submit.prevent="createProfile()">
         <div class="row">
           <div class="col-md-4">
             <fg-input
@@ -52,60 +52,6 @@
           </div>
           <div class="col-md-4">
             <fg-input
-              type="file"
-              label="Fichier de verification"
-              placeholder="Cendras KOUGBADA"
-              v-model="verificationFile"
-            >
-            </fg-input>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <button type="submit" class="btn btn-info" round>
-            Mettre à jour
-          </button>
-        </div>
-        <div class="clearfix"></div>
-      </form> -->
-      <form @submit.prevent="updateProfile()">
-        <div class="row">
-          <div class="col-md-4">
-            <fg-input type="text" label="Nom de la societé" v-model="name">
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input type="text" label="Nom du Directeur" v-model="ceoName">
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="text"
-              label="Nom du Directeur Adjoint"
-              v-model="assistantName"
-            >
-            </fg-input>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <fg-input
-              type="tel"
-              label="Telephone avec indicatif"
-              v-model="firstTelephone"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
-              type="tel"
-              label="Second Telephone "
-              v-model="secondTelephone"
-            >
-            </fg-input>
-          </div>
-          <div class="col-md-4">
-            <fg-input
               type="tel"
               label="Téléphone fixe "
               placeholder="+22890989876"
@@ -134,9 +80,7 @@
         </div>
 
         <div class="text-center">
-          <button type="submit" class="btn btn-info" round>
-            Mettre à jour
-          </button>
+          <button type="submit" class="btn btn-info" round>Valider</button>
         </div>
         <div class="clearfix"></div>
       </form>
@@ -160,44 +104,53 @@ export default {
     };
   },
   methods: {
-    updateProfile() {
-      Profil.updatePartner(
-        {
-          society_name: this.name,
-          ceo_name: this.ceoName,
-          address: this.address,
-          fixed_number: this.fixedNumber,
-          assistant_name: this.assistantName,
-          first_telephone: this.firstTelephone,
-          second_telephone: this.secondTelephone,
-          verification_file: this.verificationFile,
-        },
-        sessionStorage.getItem("partnerId")
-      ).then(() => {
-        //# alert success
+    createProfile() {
+      Profil.addPartner({
+        society_name: this.name,
+        ceo_name: this.ceoName,
+        address: this.address,
+        fixed_number: this.fixedNumber,
+        assistant_name: this.assistantName,
+        first_telephone: this.firstTelephone,
+        second_telephone: this.secondTelephone,
+        verification_file: this.verificationFile,
+        user_id: sessionStorage.getItem("userId"),
+      }).then((response) => {
+        console.log(response.data);
+        sessionStorage.setItem("partnerId", response.data.partner_id);
+        // # alert success
         this.$swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Profil modifié avec succès",
+          title: "Votre societé a bien été ajouté",
           showConfirmButton: false,
           timer: 1500,
         });
+        this.$router.push("/");
       });
     },
-    getPartner(id) {
-      Profil.getPartner(id).then((response) => {
-        let partner = response.data.data;
-        this.name = partner.society_name;
-        this.ceoName = partner.ceo_name;
-        this.assistantName = partner.assistant_name;
-        this.firstTelephone = partner.first_telephone;
-        this.secondTelephone = partner.second_telephone;
-        this.verificationFile = partner.verification_file;
-      });
+    deleteAllCookies() {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
     },
   },
   mounted() {
-    this.getPartner(sessionStorage.getItem("partnerId"));
+    // sessionStorage.clear();
+    // this.deleteAllCookies();
+    if (
+      sessionStorage.getItem("userId") == "" ||
+      sessionStorage.getItem("userId") == null
+    ) {
+      sessionStorage.setItem("userId", document.cookie.trim().substring(17));
+      this.deleteAllCookies();
+    }
+    // console.log(document.cookie.trim().substring(17));
+    // console.log(sessionStorage.getItem("userId"));
   },
 };
 </script>

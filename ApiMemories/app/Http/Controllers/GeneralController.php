@@ -37,18 +37,21 @@ class GeneralController extends Controller
     public function createPartner(Request $request)
     {
         //verify if the telephones are correct and then create
-        $telephone1 = new Util();
-        $telephone2 = new Util();
+        $util1 = new Util();
+        $util2 = new Util();
+        $isCorrectTel1 = $util1->isCorrectTelephone($request->first_telephone);
+        $isCorrectTel2 = $util2->isCorrectTelephone($request->second_telephone);
+
         if (
-            $telephone1->isCorrectTelephone($request->first_telephone) and
-                $telephone2->isCorrectTelephone($request->second_telephone)
+            $isCorrectTel1 && $isCorrectTel2
         ) {
-            Partner::create($request->all());
+            $partner = Partner::create($request->all());
 
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Partner created successfully'
+                    'message' => 'Partner created successfully',
+                    'partner_id' => $partner->id,
                 ]
             );
         }

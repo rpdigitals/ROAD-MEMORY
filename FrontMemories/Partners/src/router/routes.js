@@ -5,6 +5,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
+import PartnerInscription from "@/pages/PartnerInscription.vue";
 import News from "@/pages/News.vue";
 import Subscription from "@/pages/Subscription.vue";
 import Services from "@/pages/Services.vue";
@@ -23,6 +24,11 @@ const routes = [
     component: DashboardLayout,
     redirect: "/dashboard",
     children: [
+      // {
+      //   path: "/:partnerId",
+      //   name: "Tableau de bord Un",
+      //   component: DashboardOne,
+      // },
       {
         path: "dashboard",
         name: "Tableau de bord",
@@ -34,8 +40,13 @@ const routes = [
         component: UserProfile,
       },
       {
+        path: "partner-inscription",
+        name: "Inscription",
+        component: PartnerInscription,
+      },
+      {
         path: "news",
-        name: "news",
+        name: "News",
         component: News,
       },
       {

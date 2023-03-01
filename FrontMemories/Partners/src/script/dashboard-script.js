@@ -1,6 +1,7 @@
 import { StatsCard, ChartCard } from "@/components/index";
 import Dashboard from "../services/dashboard-request.js";
 import Chartist from "chartist";
+import { VueCookieNext } from "vue-cookie";
 export default {
   components: {
     StatsCard,
@@ -59,6 +60,12 @@ export default {
       );
     },
     serviceInfo() {
+      if (
+        sessionStorage.getItem("partnerId") == "" ||
+        sessionStorage.getItem("partnerId") == null
+      ) {
+        this.$router.push;
+      }
       Dashboard.service(sessionStorage.getItem("partnerId")).then(
         (response) => {
           // var numberOfServices =
@@ -70,34 +77,39 @@ export default {
         }
       );
     },
-    // register() {
-    //   // Dashboard.register({
-    //   //   name: "First Partner",
-    //   //   email: "first@partner.com",
-    //   //   password: "firstpartner",
-    //   // }).then((response) => {
-    //   //   console.log(response.data);
-    //   // });
-    //   // Dashboard.register({
-    //   //   name: "Second Partner",
-    //   //   email: "second@partner.com",
-    //   //   password: "secondpartner",
-    //   // }).then((response) => {
-    //   //   console.log(response.data);
-    //   // });
-    //   // Dashboard.register({
-    //   //   name: "Third Partner",
-    //   //   email: "third@partner.com",
-    //   //   password: "thirdpartner",
-    //   // }).then((response) => {
-    //   //   console.log(response.data);
-    //   // });
-    // },
+    deleteAllCookies() {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+    },
   },
   mounted() {
-    // this.register();
-    sessionStorage.setItem("partnerId", 1);
-    this.reservationInfo();
-    this.serviceInfo();
+    // sessionStorage.clear();
+    // this.deleteAllCookies();
+
+    if (
+      (sessionStorage.getItem("partnerId") !== "") &
+      (sessionStorage.getItem("partnerId") !== null)
+    ) {
+      this.reservationInfo();
+      this.serviceInfo();
+      this.deleteAllCookies();
+    } else {
+      sessionStorage.setItem("partnerId", document.cookie.substring(20));
+      this.reservationInfo();
+      this.serviceInfo();
+      this.deleteAllCookies();
+      if (
+        (sessionStorage.getItem("partnerId") !== "") &
+        (sessionStorage.getItem("partnerId") !== null)
+      ) {
+        sessionStorage.setItem("userId", document.cookie.trim().substring(17));
+        this.deleteAllCookies();
+      }
+    }
   },
 };

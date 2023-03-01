@@ -21,7 +21,26 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
         $user = User::where('email', $request->email)->first();
-        return $user->customer()->id;
+        if ($user->customer()) {
+            return
+                response()->Json([
+                    'success_looged_in' => true,
+                    'customer_id' => $user->customer()->id,
+                ]);
+        } else {
+            if ($user->partner()) {
+                return
+                    response()->Json([
+                        'success_looged_in' => true,
+                        'partner_id' => $user->partner()->id,
+                    ]);
+            }
+
+            return response()->Json([
+                'success' => true,
+                'user_id' => $user->id,
+            ]);
+        }
     }
 
     /**

@@ -29,30 +29,44 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'min:8'],
         ]);
         $util = new Util();
-        $isCorrectTel = $util->isCorrectTelephone($request->telephone);
+        if ($request->telephone) {
+            $isCorrectTel = $util->isCorrectTelephone($request->telephone);
 
-        if ($isCorrectTel) {
+            if ($isCorrectTel) {
+                $user = User::create([
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                if ($request->name) {
+                }
+                $customer = Customer::create([
+                    'name' => $request->name,
+                    'user_id' => $user->id,
+                    'telephone' => $request->telephone,
+                ]);
+
+                return response()->Json([
+                    'success' => true,
+                    'customer_id' => $customer->id,
+                ]);
+
+                event(new Registered($user));
+
+                Auth::login($user);
+            } else {
+                return response()->Json([
+                    'success' => false,
+                ]);
+            }
+        } else {
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-            $customer = Customer::create([
-                'name' => $request->name,
-                'user_id' => $user->id,
-                'telephone' => $request->telephone,
-            ]);
 
             return response()->Json([
                 'success' => true,
-                'customer_id' => $customer->id,
-            ]);
-
-            event(new Registered($user));
-
-            Auth::login($user);
-        } else {
-            return response()->Json([
-                'success' => false,
+                'user_id' => $user->id,
             ]);
         }
     }

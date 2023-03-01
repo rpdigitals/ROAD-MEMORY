@@ -7,12 +7,12 @@
         <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
           <div id="login">
             <div class="text-center">
-              <img
+              <!-- <img
                 src="img/logo_sticky.png"
                 alt="Image"
                 width="160"
                 height="34"
-              />
+              /> -->
             </div>
             <hr />
             <form>

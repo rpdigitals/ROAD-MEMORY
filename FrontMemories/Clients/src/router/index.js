@@ -33,6 +33,8 @@ import CarDetailView from "../views/CarDetailView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import WishListView from "../views/WishListView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import RegisterPartnerView from "../views/RegisterPartnerView.vue";
+
 import LoginView from "../views/LoginView.vue";
 import PasswordView from "../views/PasswordView.vue";
 
@@ -69,6 +71,13 @@ const router = createRouter({
 
       component: RegisterView,
     },
+    {
+      path: "/register-partner",
+      name: "registerpartner",
+
+      component: RegisterPartnerView,
+    },
+
     {
       path: "/login",
       name: "login",

@@ -12,8 +12,7 @@ export default {
   methods: {
     logout() {
       this.isLogged = false;
-      sessionStorage.setItem("isLogged", 0);
-      this.$session.destroy();
+      sessionStorage.clear();
       this.$router.push("/");
     },
     toggleMobileNav() {
