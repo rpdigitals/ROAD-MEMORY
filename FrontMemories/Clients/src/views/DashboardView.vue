@@ -127,9 +127,12 @@
                     <td>
                       <a class="btn btn-info">
                         <i class="icon icon-edit"></i> </a
-                      ><a class="btn btn-danger"
-                        ><i class="icon icon-trash"></i
-                      ></a>
+                      ><button
+                        class="btn btn-danger"
+                        @click="deleteTourBooking(tourBooking.id)"
+                      >
+                        <i class="icon icon-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -161,9 +164,12 @@
                     <td>
                       <a class="btn btn-info">
                         <i class="icon icon-edit"></i> </a
-                      ><a class="btn btn-danger"
-                        ><i class="icon icon-trash"></i
-                      ></a>
+                      ><button
+                        class="btn btn-danger"
+                        @click="deleteHotelBooking(hotelBooking.id)"
+                      >
+                        <i class="icon icon-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -199,9 +205,12 @@
                     <td>
                       <a class="btn btn-info">
                         <i class="icon icon-edit"></i> </a
-                      ><a class="btn btn-danger"
-                        ><i class="icon icon-trash"></i
-                      ></a>
+                      ><button
+                        class="btn btn-danger"
+                        @click="deleteRestoBooking(restoBooking.id)"
+                      >
+                        <i class="icon icon-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -236,9 +245,12 @@
                       </div>
                     </a>
                   </div>
-                  <div class="tour_title">
-                    <h3>
+                  <div class="align-items-end">
+                    <h5 style="float: left">
                       <strong> {{ wishList.tour.name }}</strong>
+                    </h5>
+                    <h3 @click="deleteWishList(wishList.id)">
+                      <i style="float: right" class="icon icon-trash"></i>
                     </h3>
                     <!-- end rating -->
                     <div class="wishlist_close_admin"></div>
@@ -359,8 +371,110 @@
                 </form>
               </div>
             </div> -->
+            <center class="text-bold">
+              <br />
+              <p style="font-size: 25px">Modifier votre profil</p>
+            </center>
+            <br />
+            <br />
 
-            Parametres
+            <form @submit.prevent="updateCustomer()">
+              <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <hr />
+                      <div class="m-3">
+                        <label for="">Nom Actuel</label>
+                        <input
+                          type="text"
+                          readonly
+                          class="form-control"
+                          name=""
+                          v-model="name"
+                          id=""
+                        />
+                      </div>
+                      <div class="m-3">
+                        <label for="">Adresse mail actuel </label>
+                        <input
+                          type="text"
+                          readonly
+                          class="form-control"
+                          name=""
+                          v-model="email"
+                          id=""
+                        />
+                      </div>
+                      <div class="m-3">
+                        <label for="">Téléphone actuel </label>
+                        <input
+                          type="text"
+                          readonly
+                          class="form-control"
+                          name=""
+                          v-model="telephone"
+                          id=""
+                        />
+                      </div>
+                      <hr />
+                    </div>
+
+                    <div class="col-md-5">
+                      <hr />
+
+                      <div class="m-3">
+                        <label for="">Nom</label>
+
+                        <input
+                          type="text"
+                          class="form-control"
+                          name=""
+                          v-model="name"
+                          id=""
+                        />
+                      </div>
+                      <div class="m-3">
+                        <label for="">Adresse mail </label>
+
+                        <input
+                          type="text"
+                          class="form-control"
+                          name=""
+                          v-model="email"
+                          id=""
+                        />
+                      </div>
+                      <div class="m-3">
+                        <label for="">Téléphone (avec indicatif)</label>
+
+                        <input
+                          type="text"
+                          class="form-control"
+                          name=""
+                          v-model="telephone"
+                          id=""
+                        />
+                        <div class="text-danger" v-if="error == 1">
+                          <br />
+                          <p class="text-center">
+                            Veuillez entrer un numéro correct
+                          </p>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                  </div>
+                </div>
+                <div class="align-items-center m-3 text-bold text-center">
+                  <button type="submit" class="btn btn-warning m-3">
+                    Modifier
+                  </button>
+                </div>
+              </div>
+            </form>
+
             <hr />
             <br />
             <!-- End row -->
@@ -587,7 +701,6 @@
 .iconHeading {
   color: #008489;
   font-weight: bolder;
-  font-size: 30px;
 }
 @media (min-width: 839px) {
   .tablinks {

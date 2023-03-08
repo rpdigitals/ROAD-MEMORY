@@ -16,10 +16,14 @@
                 />
               </div> -->
               <hr />
+              <div>
+                <button @click="signIn()">Sign in with Google</button>
+              </div>
               <form @submit.prevent="register">
                 <a href="#0" class="social_bt facebook"
                   >S'inscrire avec Facebook</a
                 >
+
                 <a href="#0" class="social_bt google">S'inscrire avec Google</a>
                 <div class="divider"><span>Ou</span></div>
                 <div class="form-group">

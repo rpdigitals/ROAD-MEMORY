@@ -373,12 +373,13 @@
               >Reserver</router-link
             >
             <div v-if="isLogged">
-              <a
+              <button
                 v-if="hasWished"
                 class="btn_full_outline"
                 href="javascript:void(0)"
-                ><i class="icon-heart"></i>
-              </a>
+              >
+                <i class="icon-heart"></i>
+              </button>
               <a
                 v-else
                 class="btn_full_outline"

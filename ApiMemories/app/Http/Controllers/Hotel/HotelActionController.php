@@ -92,7 +92,7 @@ class HotelActionController extends Controller {
     }
 
     public function deleteHotelBooking( $id ) {
-        HotelBooking::where( 'id', $id )->first()->update( [ 'status', 0 ] );
+        HotelBooking::where( 'id', $id )->first()->update( [ 'status'=> 0 ] );
         return response()->json( [
             'success'=>true,
             'message'=>'Hotel Booking deleted successfully'

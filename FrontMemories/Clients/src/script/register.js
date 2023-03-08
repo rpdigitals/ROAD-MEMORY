@@ -40,5 +40,24 @@ export default {
       }
       console.log(this.registerStatus);
     },
+
+    signIn() {
+      console.log("registerStatus");
+      gapi.auth2
+        .getAuthInstance()
+        .signIn()
+        .then((user) => {
+          console.log(user.getBasicProfile());
+          // Do something with the user data, e.g. send it to your server for authentication
+        });
+    },
+  },
+  mounted() {
+    gapi.load("auth2", () => {
+      gapi.auth2.init({
+        client_id:
+          "1046619801838-3hg56gdduqqhg1u2iqnfj1oapqg5ulf0.apps.googleusercontent.com",
+      });
+    });
   },
 };

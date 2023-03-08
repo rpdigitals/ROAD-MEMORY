@@ -157,6 +157,7 @@ class GeneralController extends Controller
         if ($telephone->isCorrectTelephone($request->telephone)) {
             $customer = Customer::where('id', $id)->first();
             $customer->update($request->all());
+            User::where('id', $customer->user_id)->first()->update($request->all());
 
             return response()->json(
                 [
@@ -172,6 +173,16 @@ class GeneralController extends Controller
                 'message' => 'wrong Telephone'
             ]
         );
+    }
+
+    public function customer($id)
+    {
+        $customer = Customer::where('id', $id)->first();
+
+        return response()->json([
+            'customer' => $customer,
+            'user' => $customer->user(),
+        ]);
     }
 
     public function allCustomer()

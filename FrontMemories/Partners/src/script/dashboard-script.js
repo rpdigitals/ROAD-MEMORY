@@ -88,9 +88,9 @@ export default {
     },
   },
   mounted() {
-    // sessionStorage.clear();
-    // this.deleteAllCookies();
-
+    //sessionStorage.clear();
+    //this.deleteAllCookies();
+    console.log(sessionStorage.getItem("partnerId"));
     if (
       (sessionStorage.getItem("partnerId") !== "") &
       (sessionStorage.getItem("partnerId") !== null)

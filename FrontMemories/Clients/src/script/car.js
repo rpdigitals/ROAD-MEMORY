@@ -20,6 +20,7 @@ export default {
       });
     },
     goToCarDetails(carId) {
+      console.log(carId);
       this.$router.push(`/car-details/${carId}`);
     },
     searchByKeyword() {

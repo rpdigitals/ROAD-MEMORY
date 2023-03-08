@@ -105,7 +105,7 @@ class RestoActionController extends Controller
 
     public function deleteRestoBooking($id)
     {
-        RestoBooking::where('id', $id)->first()->update(['status', 0]);
+        RestoBooking::where('id', $id)->first()->update(['status' => 0]);
 
         return response()->json([
             'success' => true,

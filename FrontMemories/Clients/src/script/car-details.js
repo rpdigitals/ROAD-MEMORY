@@ -12,6 +12,8 @@ export default {
   methods: {
     carDetails() {
       Car.carDetails(this.$route.params.id).then((response) => {
+        console.log(response);
+
         this.car = response.data["data"][0];
         this.partner = response.data["data"][0].partner;
       });

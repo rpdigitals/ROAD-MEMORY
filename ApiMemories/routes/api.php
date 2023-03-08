@@ -26,6 +26,7 @@ Route::get('/delete-partner/{id}', [GeneralController::class, 'deletePartner']);
 Route::get('/all-partner', [GeneralController::class, 'allPartner']);
 
 Route::post('/create-customer', [GeneralController::class, 'createCustomer']);
+Route::get('/customer/{id}', [GeneralController::class, 'customer']);
 Route::post('/update-customer/{id}', [GeneralController::class, 'updateCustomer']);
 Route::get('/delete-customer/{id}', [GeneralController::class, 'deleteCustomer']);
 Route::get('/all-customer', [GeneralController::class, 'allCustomer']);

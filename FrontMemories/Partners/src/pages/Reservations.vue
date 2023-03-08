@@ -7,9 +7,10 @@
           class="card-img-top"
           src="https:mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(121).webp"
           alt="Card image cap"
+          @click="goToOneBooking()"
         />
         <div class="card-body">
-          <p class="card-text">{{ tourServices[index].name }}</p>
+          <p class="card-text">{{ tour[0] }}</p>
         </div>
       </div>
     </div>
