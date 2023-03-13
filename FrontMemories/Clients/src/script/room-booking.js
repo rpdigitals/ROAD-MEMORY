@@ -28,7 +28,7 @@ export default {
     bookHotel() {
       this.hasBooked = true;
       Rooms.bookHotel({
-        room_id: this.room.id,
+        // room_id: this.room.id,
         hotel_id: sessionStorage.getItem("hotelId"),
         customer_id: sessionStorage.getItem("customerId"),
         date: this.date,
@@ -36,7 +36,7 @@ export default {
         number_of_nigth: this.numberOfNigth,
         number_of_nigth: this.numberOfNigth,
       }).then((Response) => {
-        console.log(Response);
+        
       });
     },
   },

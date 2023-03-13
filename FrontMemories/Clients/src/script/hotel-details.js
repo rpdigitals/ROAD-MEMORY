@@ -10,7 +10,7 @@ export default {
       hotelId: "",
       category: {},
       caracteristics: {},
-      room_categories: {},
+      room_categories: [],
       date: "",
       time: "",
       numberOfPerson: "0",
@@ -25,6 +25,7 @@ export default {
     hotelDetails(id) {
       Hotel.hotelDetails(id)
         .then((response) => {
+          console.log(response.data["data"][0].room_categories);
           this.hotel = response.data["data"][0];
           this.hotelId = response.data["data"][0].id;
           this.price = response.data["data"][0].price;
@@ -32,11 +33,12 @@ export default {
           this.room_categories = response.data["data"][0].room_categories;
           this.note = response.data["data"][0].note;
           this.reviews = response.data["data"][0].reviews;
+          // console.log(this.hotel);
           // this.checkHotelWishedByCustomer(
           //   this.hotel.id,
           //   parseInt(sessionStorage.getItem("customerId"))
           // );
-          console.log(this.caracteristics);
+          //console.log(this.room_categories);
         })
         .catch((e) => {
           console.log(e);

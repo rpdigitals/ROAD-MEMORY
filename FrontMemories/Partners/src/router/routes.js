@@ -16,6 +16,7 @@ import Payements from "@/pages/Payements.vue";
 import Typography from "@/pages/Typography.vue";
 import Reservations from "@/pages/Reservations.vue";
 import AddService from "@/pages/AddService.vue";
+import AddRoom from "@/pages/AddRoom.vue";
 import EditService from "@/pages/EditService.vue";
 
 const routes = [
@@ -94,6 +95,11 @@ const routes = [
         path: "/add-service/:service",
         name: "Ajouter un service",
         component: AddService,
+      },
+      {
+        path: "/add-room/:id",
+        name: "Ajouter une chambre",
+        component: AddRoom,
       },
       {
         path: "/edit-service/:service/:site",

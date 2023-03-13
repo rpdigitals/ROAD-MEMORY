@@ -104,12 +104,13 @@
             <div class="col-lg-9">
               <ul class="list-group">
                 <li
+                  cursor:pointer
                   @click="roomCategory(category.id)"
                   class="list-group-item d-flex justify-content-between align-items-center"
                   v-for="(category, index) in room_categories"
                   :key="index"
                 >
-                  {{ category.name }}
+                  <span cursor:pointer> {{ category.name }}</span>
                   <span class="badge bg-primary rounded-pill">
                     {{ category.rooms.length }}</span
                   >

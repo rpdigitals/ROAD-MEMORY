@@ -41,6 +41,13 @@
                     >
                   </drop-down> -->
                 </button>
+                <span v-if="data.length > 0">
+                  <button
+                    v-if="data[0].hasOwnProperty('chambres')"
+                    class="ti-plus btn btn-warning"
+                    @click="goToAddRoom(item.idBD)"
+                  ></button
+                ></span>
               </td>
             </slot>
           </tr>
@@ -276,6 +283,9 @@ export default {
       sessionStorage.setItem("carToEdit", service);
       sessionStorage.setItem("restoToEdit", service);
       this.$router.push(`/edit-service/${service}/${site}`);
+    },
+    goToAddRoom(id) {
+      this.$router.push(`/add-room/${id}`);
     },
   },
 };

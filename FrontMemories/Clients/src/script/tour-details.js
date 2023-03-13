@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import Tour from "../services/tour/tour-request.js";
 import TourBooking from "../services/tour/tour-booking-request.js";
 import TourWishList from "../services/tour/tour-wishlist-request.js";
+
 $(function () {
   $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
 });
@@ -29,7 +30,6 @@ export default {
         .then((response) => {
           this.tour = response.data["data"][0];
           this.openDaysHours = JSON.parse(this.tour.open_days_hours);
-          console.log(this.openDaysHours);
           this.tourId = response.data["data"][0].id;
           this.price = response.data["data"][0].price;
           this.category = response.data["data"][0].category;
@@ -82,5 +82,12 @@ export default {
   },
   mounted() {
     this.tourDetails(this.$route.params.id);
+    this.$getLocation()
+      .then((coordinates) => {
+        console.log(coordinates);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
